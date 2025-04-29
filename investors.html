@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investors | Flowly - The Future of Blue-Collar Finance</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .navy { color: #0A0A23; }
+        .bg-navy { background-color: #0A0A23; }
+        .teal { color: #00D1B2; }
+        .bg-teal { background-color: #00D1B2; }
+        .aqua { color: #29ABE2; }
+        .bg-aqua { background-color: #29ABE2; }
+        .charcoal { color: #2D2D2D; }
+        .bg-light-grey { background-color: #F7F8FA; }
+        .success-green { color: #2ECC71; }
+        .bg-success-green { background-color: #2ECC71; }
+        .alert-orange { color: #FF8C42; }
+        .bg-alert-orange { background-color: #FF8C42; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0A0A23 0%, #1a1a4e 100%);
+        }
+        
+        /* Button gradient styling */
+        .btn-gradient {
+            background: linear-gradient(90deg, #0A0A23 0%, #0A0A23 50%, #00D1B2 50%, #00D1B2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            background: linear-gradient(90deg, #0A0A23 0%, #0A0A23 40%, #00D1B2 60%, #00D1B2 100%);
+            transform: translateY(-2px);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .stats-card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #00D1B2;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            border: 2px solid #00D1B2;
+        }
+
+        .team-card {
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #00D1B2;
+        }
+    </style>
+</head>
+<body class="bg-light-grey font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold navy">flow<span class="teal">ly</span></a>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="index.html#how-it-works" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            How It Works
+                        </a>
+                        <a href="index.html#why-flowly" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Why Flowly
+                        </a>
+                        <a href="index.html#partners" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            For Partners
+                        </a>
+                        <a href="index.html#about" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            About
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html#contact" class="hidden md:inline-flex btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        Contact Us
+                    </a>
+                    <a href="flowly-registration.html" class="hidden md:inline-flex btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-plus mr-2"></i>Register
+                    </a>
+                    <a href="/frontend/flowly-business-dashboard.tsx" class="btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-circle mr-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative gradient-bg">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute right-0 top-0 transform translate-x-1/4 -translate-y-1/4">
+                <div class="w-96 h-96 bg-teal opacity-10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="absolute left-0 bottom-0 transform -translate-x-1/4 translate-y-1/4">
+                <div class="w-96 h-96 bg-aqua opacity-10 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
+            <div class="text-center">
+                <span class="inline-block bg-teal bg-opacity-20 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Investment Opportunity</span>
+                <h1 class="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
+                    Transforming <span class="text-teal">Cash Flow</span><br>for Blue-Collar Businesses
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-300">
+                    Flowly is revolutionizing invoice factoring with AI verification technology, delivering same-day payments to an underserved $1.5T market.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row sm:justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#investment-opportunity" class="bg-teal hover:bg-opacity-90 text-white px-8 py-3 rounded-md text-lg font-medium shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        View Investment Deck
+                    </a>
+                    <a href="#investor-contact" class="bg-white bg-opacity-10 hover:bg-opacity-20 text-white border border-white border-opacity-20 px-8 py-3 rounded-md text-lg font-medium transition duration-300 ease-in-out">
+                        Contact Investor Relations
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Leadership</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Meet Our Team
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Industry experts with deep experience in fintech, blue-collar industries, and AI
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Founder & CEO -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden team-card">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="h-20 w-20 rounded-full overflow-hidden">
+                                <img src="/api/placeholder/150/150" alt="Brent Broten" class="w-full h-full object-cover" />
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-bold navy">Brent Broten</h3>
+                                <p class="text-teal font-medium">Founder & CEO</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600 mb-4">18+ years in automotive and logistics operations with expertise in supply chain optimization and financial operations.</p>
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">Operations</span>
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">Finance</span>
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">Blue-Collar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTO -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden team-card">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="h-20 w-20 rounded-full overflow-hidden">
+                                <img src="/api/placeholder/150/150" alt="Sarah Chen" class="w-full h-full object-cover" />
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-bold navy">Sarah Chen</h3>
+                                <p class="text-teal font-medium">Chief Technology Officer</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600 mb-4">Former lead AI engineer at Amazon Web Services with expertise in computer vision and document processing systems.</p>
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">AI/ML</span>
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">Cloud</span>
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">Scalability</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CFO -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden team-card">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="h-20 w-20 rounded-full overflow-hidden">
+                                <img src="/api/placeholder/150/150" alt="Michael Reeves" class="w-full h-full object-cover" />
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-bold navy">Michael Reeves</h3>
+                                <p class="text-teal font-medium">Chief Financial Officer</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600 mb-4">15+ years in financial services with experience at TD Bank and Brookfield Asset Management in factoring and structured finance.</p>
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">Finance</span>
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">Banking</span>
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">Factoring</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Advisory Board -->
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-bold navy mb-6">Advisory Board</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="h-12 w-12 rounded-full overflow-hidden">
+                                    <img src="/api/placeholder/150/150" alt="Jennifer Torres" class="w-full h-full object-cover" />
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium navy">Jennifer Torres</h4>
+                                <p class="text-sm text-teal">Former EVP, Royal Bank of Canada</p>
+                                <p class="mt-1 text-sm text-gray-600">25+ years in commercial banking and SMB lending</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="h-12 w-12 rounded-full overflow-hidden">
+                                    <img src="/api/placeholder/150/150" alt="Robert Blackwell" class="w-full h-full object-cover" />
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium navy">Robert Blackwell</h4>
+                                <p class="text-sm text-teal">CEO, Northern Construction Group</p>
+                                <p class="mt-1 text-sm text-gray-600">Industry leader in commercial construction with 30+ years experience</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="h-12 w-12 rounded-full overflow-hidden">
+                                    <img src="/api/placeholder/150/150" alt="David Kim" class="w-full h-full object-cover" />
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium navy">David Kim</h4>
+                                <p class="text-sm text-teal">Partner, Blue Collar Ventures</p>
+                                <p class="mt-1 text-sm text-gray-600">Specialized investor in construction and trades technology</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Investors -->
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-bold navy mb-6">Current Investors</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="h-12 w-12 rounded-full overflow-hidden bg-teal bg-opacity-10 flex items-center justify-center">
+                                    <i class="fas fa-building text-teal"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium navy">Maple Leaf Ventures</h4>
+                                <p class="text-sm text-teal">Lead Investor - Seed Round</p>
+                                <p class="mt-1 text-sm text-gray-600">Canadian VC firm specializing in early-stage fintech</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="h-12 w-12 rounded-full overflow-hidden bg-teal bg-opacity-10 flex items-center justify-center">
+                                    <i class="fas fa-users text-teal"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium navy">Blue Collar Angels</h4>
+                                <p class="text-sm text-teal">Angel Syndicate</p>
+                                <p class="mt-1 text-sm text-gray-600">Group of construction and trades industry executives</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Investment Highlights Section -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Investor Overview</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Investment Highlights
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    The key factors driving Flowly's growth and investment potential
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-light-grey p-8 rounded-xl shadow-sm card-hover">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal bg-opacity-10 mb-6">
+                        <i class="fas fa-chart-line text-teal text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-6">Revenue Streams</h3>
+                        <div class="space-y-8">
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-percentage text-teal"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg font-semibold navy">Transaction Fees</h4>
+                                    </div>
+                                </div>
+                                <div class="ml-14">
+                                    <p class="text-gray-600 mb-3">2%-5% of funded payout, based on invoice quality and payment terms.</p>
+                                    <div class="bg-white rounded-lg p-4">
+                                        <div class="flex justify-between items-center">
+                                            <div class="text-sm text-gray-500">Example:</div>
+                                            <div class="text-sm font-medium navy">$10,000 invoice × 4% = $400 fee</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-laptop text-teal"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg font-semibold navy">SaaS Subscription</h4>
+                                    </div>
+                                </div>
+                                <div class="ml-14">
+                                    <p class="text-gray-600 mb-3">$99-$299/month based on business size, includes advanced features.</p>
+                                    <div class="bg-white rounded-lg p-4">
+                                        <div class="flex justify-between items-center">
+                                            <div class="text-sm text-gray-500">Features include:</div>
+                                            <div class="text-sm font-medium navy">Cash flow forecasting, client management</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-handshake text-teal"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg font-semibold navy">Partner Revenue Share</h4>
+                                    </div>
+                                </div>
+                                <div class="ml-14">
+                                    <p class="text-gray-600 mb-3">Revenue sharing with factoring partners for qualified lead generation.</p>
+                                    <div class="bg-white rounded-lg p-4">
+                                        <div class="flex justify-between items-center">
+                                            <div class="text-sm text-gray-500">Structure:</div>
+                                            <div class="text-sm font-medium navy">10-15% of partner's factoring fees</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h3 class="text-xl font-bold navy mb-6">Financial Projections</h3>
+                            <div class="chart-container">
+                                <canvas id="financialChart"></canvas>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-2">*Projections are based on current growth trajectory and market penetration rates.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-light-grey p-8 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-bold navy mb-6">Key Financial Metrics</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium navy">Monthly Recurring Revenue</div>
+                                    <div class="text-sm font-bold text-teal">$148,000</div>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" style="width: 14.8%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2">Target: $1M by 2027</p>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium navy">Monthly Transaction Volume</div>
+                                    <div class="text-sm font-bold text-teal">$4.2M</div>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" style="width: 4.2%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2">Target: $100M by 2027</p>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium navy">Customer Acquisition Cost (CAC)</div>
+                                    <div class="text-sm font-bold text-teal">$820</div>
+                                </div>
+                                <div class="mt-2 flex justify-between">
+                                    <span class="text-xs text-gray-500">Industry Average: $1,200</span>
+                                    <span class="text-xs text-green-500">32% Below Average</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium navy">Customer Lifetime Value (LTV)</div>
+                                    <div class="text-sm font-bold text-teal">$12,640</div>
+                                </div>
+                                <div class="mt-2 flex justify-between">
+                                    <span class="text-xs text-gray-500">LTV:CAC Ratio</span>
+                                    <span class="text-xs text-green-500">15.4:1</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium navy">Gross Margin</div>
+                                    <div class="text-sm font-bold text-teal">78%</div>
+                                </div>
+                                <div class="mt-2 flex justify-between">
+                                    <span class="text-xs text-gray-500">Industry Average: 55%</span>
+                                    <span class="text-xs text-green-500">42% Above Average</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium navy">Burn Rate</div>
+                                    <div class="text-sm font-bold text-teal">$85,000/month</div>
+                                </div>
+                                <div class="mt-2 flex justify-between">
+                                    <span class="text-xs text-gray-500">Runway</span>
+                                    <span class="text-xs text-orange-500">18 months (pre-investment)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Growth Strategy & Roadmap Section -->
+    <div class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Growth Plan</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Growth Strategy & Roadmap
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Our path to scaling across Canada and beyond
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-bold navy mb-6">Strategic Growth Plan</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="timeline-item pt-0">
+                            <div class="timeline-dot"></div>
+                            <div class="pl-8 pb-8">
+                                <h4 class="text-lg font-semibold navy">Phase 1: Market Validation (Completed)</h4>
+                                <div class="mt-2 text-gray-600">
+                                    <ul class="space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>Platform development and initial AI verification system</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>First factoring partner relationships established</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>Launch with initial 25 blue-collar businesses</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>$1.5M in invoices processed</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="pl-8 pb-8">
+                                <h4 class="text-lg font-semibold navy">Phase 2: Expansion (Current)</h4>
+                                <div class="mt-2 text-gray-600">
+                                    <ul class="space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>Enhanced AI verification system with geo-verification</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-spinner text-blue-500 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>Expansion to 200+ businesses across Alberta and British Columbia</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-spinner text-blue-500 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>Secure 3 additional factoring partners</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-spinner text-blue-500 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>$25M in total invoice volume</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="pl-8 pb-8">
+                                <h4 class="text-lg font-semibold navy">Phase 3: Canada-Wide (2026)</h4>
+                                <div class="mt-2 text-gray-600">
+                                    <ul class="space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-gray-300 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>Full Canadian market penetration</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-gray-300 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>1,000+ businesses on platform</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-gray-300 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>8 factoring partners with $100M+ monthly capacity</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-gray-300 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>Launch of additional financial services</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="pl-8">
+                                <h4 class="text-lg font-semibold navy">Phase 4: U.S. Expansion (2027)</h4>
+                                <div class="mt-2 text-gray-600">
+                                    <ul class="space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-gray-300 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>Initial U.S. market entry in key construction hubs</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-gray-300 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>U.S. factoring partnerships and regulatory compliance</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-gray-300 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>5,000+ businesses across North America</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-gray-300 mt-1 mr-2 flex-shrink-0"></i>
+                                            <span>$1B+ annual transaction volume</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold navy mb-6">Product Roadmap</h3>
+                    
+                    <div class="bg-light-grey rounded-xl p-6 mb-8">
+                        <h4 class="text-lg font-semibold navy mb-4">Q3-Q4 2025</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-mobile-alt text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Mobile App 2.0</p>
+                                    <p class="text-sm text-gray-600">Enhanced mobile experience with offline capabilities for job sites</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-brain text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Advanced AI Verification</p>
+                                    <p class="text-sm text-gray-600">Next-gen verification with fraud detection enhancements</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-chart-line text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Cash Flow Forecasting</p>
+                                    <p class="text-sm text-gray-600">Predictive analytics for business financial planning</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-light-grey rounded-xl p-6 mb-8">
+                        <h4 class="text-lg font-semibold navy mb-4">Q1-Q2 2026</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-handshake text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Partner API Platform</p>
+                                    <p class="text-sm text-gray-600">Open API for factoring partners to integrate directly</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-file-invoice-dollar text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Invoice Bidding Marketplace</p>
+                                    <p class="text-sm text-gray-600">Competitive partner bidding for verified invoices</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-user-shield text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Enhanced Security Features</p>
+                                    <p class="text-sm text-gray-600">Blockchain verification and advanced security protocols</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-light-grey rounded-xl p-6">
+                        <h4 class="text-lg font-semibold navy mb-4">Q3 2026 - 2027</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-globe-americas text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">U.S. Market Expansion</p>
+                                    <p class="text-sm text-gray-600">Platform adaptation for U.S. regulatory environment</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-credit-card text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Financial Services Suite</p>
+                                    <p class="text-sm text-gray-600">Expanded offerings including business credit solutions</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-database text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Industry Data Analytics</p>
+                                    <p class="text-sm text-gray-600">Market intelligence platform for blue-collar sectors</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market Opportunity Section -->
+    <div class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Market Analysis</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    The Market Opportunity
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Blue-collar businesses represent a massive, underserved segment
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="bg-white p-8 rounded-xl shadow-sm mb-8">
+                        <h3 class="text-xl font-bold navy mb-6">Market Breakdown</h3>
+                        <div class="chart-container">
+                            <canvas id="marketChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-bold navy mb-6">Market Dynamics</h3>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-10 w-10 rounded-full bg-red-100">
+                                        <i class="fas fa-exclamation-triangle text-red-500"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">The Payment Gap Problem</h4>
+                                    <p class="mt-1 text-gray-600">65% of blue-collar businesses report cash flow problems due to payment delays of 30-90 days, affecting their ability to grow and operate efficiently.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-10 w-10 rounded-full bg-green-100">
+                                        <i class="fas fa-chart-bar text-green-500"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Growing Sector</h4>
+                                    <p class="mt-1 text-gray-600">The construction, trades, and field service sectors are growing at 8% annually, creating increasing demand for cash flow solutions.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-100">
+                                        <i class="fas fa-search-dollar text-blue-500"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Underbanked Segment</h4>
+                                    <p class="mt-1 text-gray-600">Traditional financial institutions struggle to serve blue-collar businesses effectively, creating an opportunity for specialized fintech solutions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-white p-8 rounded-xl shadow-sm h-full">
+                        <h3 class="text-xl font-bold navy mb-6">Competitive Landscape</h3>
+                        <div class="mb-8">
+                            <p class="text-gray-600 mb-6">
+                                The blue-collar factoring space features several players, but Flowly stands apart with our AI verification system and specialized focus.
+                            </p>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Feature</th>
+                                            <th class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Flowly</th>
+                                            <th class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Traditional Factors</th>
+                                            <th class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Generic Fintech</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Blue-Collar Focus</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-times-circle text-red-500 text-lg"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-times-circle text-red-500 text-lg"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">AI Verification</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-times-circle text-red-500 text-lg"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-times-circle text-red-500 text-lg"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Same-Day Funding</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-times-circle text-red-500 text-lg"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Digital-First Experience</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-times-circle text-red-500 text-lg"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Fee Structure</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                2-5%
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                3-8%
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                                5-10%
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-medium navy mb-4">Key Competitive Advantages</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-bolt text-teal"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <span class="text-sm font-medium navy">60 second verification vs. 2-3 days for traditional factors</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-shield-alt text-teal"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <span class="text-sm font-medium navy">Enhanced fraud detection with multi-point verification</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-mobile-alt text-teal"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <span class="text-sm font-medium navy">Mobile-first platform designed for on-site work documentation</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-network-wired text-teal"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <span class="text-sm font-medium navy">Network effects as more blue-collar businesses join the platform</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial & Business Model Section -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Financial Opportunity</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Business Model & Financials
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    A scalable model with multiple revenue streams
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-light-grey p-8 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-bold navy mb-6">Revenue Allocation</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-chart-pie text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Product Development (40%)</p>
+                                    <p class="text-sm text-gray-600">AI technology enhancement and platform expansion</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-bullhorn text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Marketing & Sales (30%)</p>
+                                    <p class="text-sm text-gray-600">Customer acquisition and market expansion</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-users text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Team Growth (20%)</p>
+                                    <p class="text-sm text-gray-600">Expanding engineering and customer success teams</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-university text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-800 font-medium">Working Capital (10%)</p>
+                                    <p class="text-sm text-gray-600">Operational expenses and financial reserves</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <div class="inline-block bg-white p-8 rounded-xl shadow-sm max-w-2xl">
+                <h3 class="text-xl font-bold navy mb-4">Exit Strategy</h3>
+                <p class="text-gray-600 mb-6">
+                    Flowly's strategic exit opportunities include acquisition by financial institutions seeking fintech innovation, larger factoring companies looking to modernize operations, or strategic industry players entering the blue-collar finance space.
+                </p>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="p-4 rounded-lg bg-light-grey">
+                        <div class="text-lg font-bold navy mb-1">3-5 Years</div>
+                        <p class="text-sm text-gray-600">Projected timeline to acquisition opportunity</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-light-grey">
+                        <div class="text-lg font-bold navy mb-1">5-8x</div>
+                        <p class="text-sm text-gray-600">Revenue multiple for fintech acquisitions</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-light-grey">
+                        <div class="text-lg font-bold navy mb-1">$100M+</div>
+                        <p class="text-sm text-gray-600">Target valuation at exit</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Investor Contact Section -->
+<div id="investor-contact" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Get In Touch</span>
+            <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                Investor Relations
+            </h2>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                Connect with our team to explore investment opportunities
+            </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-light-grey rounded-xl shadow-sm overflow-hidden">
+                <div class="md:grid md:grid-cols-2">
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold navy mb-6">Contact Us</h3>
+                        <form>
+                            <div class="space-y-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                                    <div class="mt-1">
+                                        <input type="text" name="name" id="name" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
+                                    <div class="mt-1">
+                                        <input type="text" name="company" id="company" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                    <div class="mt-1">
+                                        <input type="email" name="email" id="email" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="investment" class="block text-sm font-medium text-gray-700">Investment Range</label>
+                                    <div class="mt-1">
+                                        <select id="investment" name="investment" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                            <option value="">Select Investment Range</option>
+                                            <option value="100k-250k">$100K - $250K</option>
+                                            <option value="250k-500k">$250K - $500K</option>
+                                            <option value="500k-1m">$500K - $1M</option>
+                                            <option value="1m+">$1M+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                                    <div class="mt-1">
+                                        <textarea id="message" name="message" rows="4" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <button type="submit" class="w-full bg-teal hover:bg-opacity-90 text-white py-3 px-4 rounded-md shadow-sm text-sm font-medium transition duration-150 ease-in-out">
+                                        Request Investor Package
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="bg-navy p-8 text-white">
+                        <h3 class="text-xl font-bold mb-6">Investor Resources</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-lg font-medium mb-2">Available Materials</h4>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-file-pdf text-teal mr-3"></i>
+                                        <a href="#" class="hover:text-teal transition duration-150">Download Investor Deck</a>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-file-excel text-teal mr-3"></i>
+                                        <a href="#" class="hover:text-teal transition duration-150">Financial Projections</a>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-file-alt text-teal mr-3"></i>
+                                        <a href="#" class="hover:text-teal transition duration-150">Due Diligence Package</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-lg font-medium mb-2">Direct Contact</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-envelope text-teal mr-3"></i>
+                                        <span>investors@getflowly.ca</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-phone text-teal mr-3"></i>
+                                        <span>+1 (403) 555-0177</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-lg font-medium mb-2">Schedule a Meeting</h4>
+                                <a href="#" class="inline-block bg-teal text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out hover:bg-opacity-90">
+                                    Book Investor Call
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-navy">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <span class="text-2xl font-bold text-white">flow<span class="teal">ly</span></span>
+                <p class="text-gray-300 mt-2">Instant Cash Flow for Blue-Collar Businesses</p>
+                <div class="mt-4 flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-facebook text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
+                <ul class="mt-4 space-y-4">
+                    <li><a href="index.html#about" class="text-gray-300 hover:text-white">About</a></li>
+                    <li><a href="flowly-careers.html" class="text-gray-300 hover:text-white">Careers</a></li>
+                    <li><a href="investors.html" class="text-gray-300 hover:text-white">Investors</a></li>
+                    <li><a href="flowly-privacy-policy.html" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Contact</h3>
+                <ul class="mt-4 space-y-4">
+                    <li class="flex items-center text-gray-300">
+                        <i class="fas fa-envelope mr-2 text-teal"></i>
+                        hello@getflowly.ca
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <i class="fas fa-globe mr-2 text-teal"></i>
+                        www.getflowly.ca
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-8 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+            <p>&copy; 2025 Flowly. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Mobile Menu Button (only visible on small screens) -->
+<div class="fixed bottom-6 right-6 md:hidden">
+    <button class="bg-teal text-white p-4 rounded-full shadow-lg">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+
+<!-- JavaScript for smooth scrolling -->
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+</body>
+</html>
