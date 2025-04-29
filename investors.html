@@ -479,7 +479,7 @@
                                     <div class="text-sm font-bold text-teal">$820</div>
                                 </div>
                                 <div class="mt-2 flex justify-between">
-                                    <span class="text-xs text-gray-500">Industry Average: $1,200</span>
+                                    <span class="text-xs text-gray-500">Industry Average: $225</span>
                                     <span class="text-xs text-green-500">32% Below Average</span>
                                 </div>
                             </div>
@@ -491,7 +491,7 @@
                                 </div>
                                 <div class="mt-2 flex justify-between">
                                     <span class="text-xs text-gray-500">LTV:CAC Ratio</span>
-                                    <span class="text-xs text-green-500">15.4:1</span>
+                                    <span class="text-xs text-green-500">10:1</span>
                                 </div>
                             </div>
                             
@@ -509,7 +509,7 @@
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <div class="text-sm font-medium navy">Burn Rate</div>
-                                    <div class="text-sm font-bold text-teal">$85,000/month</div>
+                                    <div class="text-sm font-bold text-teal">$32,000/month</div>
                                 </div>
                                 <div class="mt-2 flex justify-between">
                                     <span class="text-xs text-gray-500">Runway</span>
@@ -523,69 +523,219 @@
         </div>
     </div>
 
-    <!-- Financial Calculator Section -->
-<section class="py-12 bg-gray-50">
-    <div class="max-w-4xl mx-auto px-6 py-8 bg-white shadow rounded">
-      <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Flowly Financial Calculator</h2>
-      
-      <div class="space-y-6">
-        <div class="flex flex-col">
-          <label class="text-sm font-medium mb-1">Number of SaaS Customers</label>
-          <input type="number" id="saasCustomers" class="border rounded px-3 py-2" value="250">
+<!-- Financial Calculator Section -->
+<section class="py-20 bg-light-grey">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Investor Tool</span>
+            <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                Financial Projection Calculator
+            </h2>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                Explore how different variables impact Flowly's key financial metrics
+            </p>
         </div>
-  
-        <div class="flex flex-col">
-          <label class="text-sm font-medium mb-1">SaaS Monthly Price ($)</label>
-          <input type="number" id="saasPrice" class="border rounded px-3 py-2" value="99">
+
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden card-hover transition-all duration-300">
+            <div class="p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold navy mb-6">Input Parameters</h3>
+                        <div class="space-y-6">
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">Number of SaaS Customers</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-users text-gray-400"></i>
+                                    </div>
+                                    <input type="number" id="saasCustomers" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="800">
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">SaaS Monthly Price ($)</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-tag text-gray-400"></i>
+                                    </div>
+                                    <input type="number" id="saasPrice" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="99">
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">Active Factoring Users per Month</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-user-check text-gray-400"></i>
+                                    </div>
+                                    <input type="number" id="factoringUsers" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="320">
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">Average Transaction Amount ($)</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-file-invoice-dollar text-gray-400"></i>
+                                    </div>
+                                    <input type="number" id="transactionAmount" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="7500">
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">Transaction Fee Percentage (%)</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-percentage text-gray-400"></i>
+                                    </div>
+                                    <input type="number" id="transactionFee" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="4">
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">Customer Acquisition Cost ($)</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-funnel-dollar text-gray-400"></i>
+                                    </div>
+                                    <input type="number" id="cac" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="225">
+                                </div>
+                            </div>
+
+                            <button onclick="calculateFinancials()" class="w-full btn-gradient hover:shadow-lg text-white px-6 py-3 rounded-md text-base font-medium transition duration-300 ease-in-out transform hover:-translate-y-1">
+                                <i class="fas fa-calculator mr-2"></i>Calculate Financials
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold navy mb-6">Projected Results</h3>
+                        <div id="results" class="bg-light-grey rounded-xl p-6 space-y-4">
+                            <p class="text-gray-500 text-center">Enter your parameters and click calculate to see projections</p>
+                        </div>
+
+                        <div class="mt-6">
+                            <h4 class="text-lg font-semibold navy mb-4">How This Relates to Our Targets</h4>
+                            <div class="space-y-4 text-sm text-gray-600">
+                                <p>
+                                    <i class="fas fa-bullseye text-teal mr-2"></i>
+                                    <span class="font-medium navy">MRR Target:</span> $450,000 by Q3 2026
+                                </p>
+                                <p>
+                                    <i class="fas fa-chart-line text-teal mr-2"></i>
+                                    <span class="font-medium navy">Transaction Volume Target:</span> $1.8M per month by 2027
+                                </p>
+                                <p>
+                                    <i class="fas fa-balance-scale text-teal mr-2"></i>
+                                    <span class="font-medium navy">Target LTV:CAC Ratio:</span> >10:1
+                                </p>
+                                <p>
+                                    <i class="fas fa-percentage text-teal mr-2"></i>
+                                    <span class="font-medium navy">Target Gross Margin:</span> 78%
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-  
-        <div class="flex flex-col">
-          <label class="text-sm font-medium mb-1">Active Factoring Users per Month</label>
-          <input type="number" id="factoringUsers" class="border rounded px-3 py-2" value="90">
-        </div>
-  
-        <div class="flex flex-col">
-          <label class="text-sm font-medium mb-1">Average Transaction Amount ($)</label>
-          <input type="number" id="transactionAmount" class="border rounded px-3 py-2" value="7500">
-        </div>
-  
-        <div class="flex flex-col">
-          <label class="text-sm font-medium mb-1">Transaction Fee Percentage (%)</label>
-          <input type="number" id="transactionFee" class="border rounded px-3 py-2" value="4.5">
-        </div>
-  
-        <button onclick="calculateRevenue()" class="mt-4 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded">
-          Calculate Revenue
-        </button>
-  
-        <div id="results" class="mt-8 space-y-2 text-gray-700 font-medium text-lg">
-          <!-- Results will appear here -->
-        </div>
-      </div>
     </div>
-  </section>
-  
-  <script>
-  function calculateRevenue() {
+</section>
+
+<script>
+function calculateFinancials() {
     const saasCustomers = Number(document.getElementById('saasCustomers').value);
     const saasPrice = Number(document.getElementById('saasPrice').value);
     const factoringUsers = Number(document.getElementById('factoringUsers').value);
     const transactionAmount = Number(document.getElementById('transactionAmount').value);
     const transactionFee = Number(document.getElementById('transactionFee').value);
-  
+    const cac = Number(document.getElementById('cac').value);
+
+    // Calculate basic metrics
     const saasMRR = saasCustomers * saasPrice;
     const totalTransactionVolume = factoringUsers * transactionAmount;
     const transactionMRR = totalTransactionVolume * (transactionFee / 100);
     const totalMRR = saasMRR + transactionMRR;
-  
+    
+    // Calculate additional investor metrics
+    const annualRevenue = totalMRR * 12;
+    const grossMargin = 78; // Using the target from the page
+    const grossProfit = annualRevenue * (grossMargin / 100);
+    
+    // Calculate LTV (simplified calculation)
+    const avgMonthlyRevenue = totalMRR / (saasCustomers + factoringUsers);
+    const avgCustomerLifetime = 36; // Assuming 3 years average customer lifetime
+    const ltv = avgMonthlyRevenue * avgCustomerLifetime;
+    const ltvCacRatio = (ltv / cac).toFixed(1);
+    
+    // Calculate MRR progress toward target
+    const mrrTarget = 450000;
+    const mrrProgress = (totalMRR / mrrTarget) * 100;
+    
+    // Calculate transaction volume progress toward target
+    const volumeTarget = 1800000;
+    const volumeProgress = (totalTransactionVolume / volumeTarget) * 100;
+
     document.getElementById('results').innerHTML = `
-      <p>📈 <strong>Total SaaS MRR:</strong> $${saasMRR.toLocaleString()}</p>
-      <p>💵 <strong>Total Transaction Volume:</strong> $${totalTransactionVolume.toLocaleString()}</p>
-      <p>🏦 <strong>Transaction Fee MRR:</strong> $${transactionMRR.toLocaleString()}</p>
-      <p>🚀 <strong>Combined Total MRR:</strong> $${totalMRR.toLocaleString()}</p>
+        <div class="space-y-6">
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-sm font-medium navy">Monthly Recurring Revenue</div>
+                    <div class="text-sm font-bold text-teal">$${totalMRR.toLocaleString()}</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: ${Math.min(mrrProgress, 100)}%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">${mrrProgress.toFixed(1)}% of $450,000 target</p>
+            </div>
+            
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-sm font-medium navy">Transaction Volume</div>
+                    <div class="text-sm font-bold text-teal">$${totalTransactionVolume.toLocaleString()}</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: ${Math.min(volumeProgress, 100)}%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">${volumeProgress.toFixed(1)}% of $1.8M target</p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <div class="text-sm font-medium navy mb-1">SaaS MRR</div>
+                    <div class="text-lg font-bold text-teal">$${saasMRR.toLocaleString()}</div>
+                </div>
+                <div>
+                    <div class="text-sm font-medium navy mb-1">Transaction MRR</div>
+                    <div class="text-lg font-bold text-teal">$${transactionMRR.toLocaleString()}</div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <div class="text-sm font-medium navy mb-1">LTV:CAC Ratio</div>
+                    <div class="text-lg font-bold ${ltvCacRatio >= 15 ? 'text-green-500' : 'text-orange-500'}">${ltvCacRatio}:1</div>
+                </div>
+                <div>
+                    <div class="text-sm font-medium navy mb-1">Annual Revenue</div>
+                    <div class="text-lg font-bold text-teal">$${annualRevenue.toLocaleString()}</div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <div class="text-sm font-medium navy mb-1">Gross Margin</div>
+                    <div class="text-lg font-bold text-green-500">${grossMargin}%</div>
+                </div>
+                <div>
+                    <div class="text-sm font-medium navy mb-1">Gross Profit (Annual)</div>
+                    <div class="text-lg font-bold text-teal">$${grossProfit.toLocaleString()}</div>
+                </div>
+            </div>
+        </div>
     `;
-  }
-  </script>
+}
+</script>
 
     <!-- Growth Strategy & Roadmap Section -->
     <div class="py-20 bg-light-grey">
