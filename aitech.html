@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Technology | Flowly - Revolutionary Verification System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .navy { color: #0A0A23; }
+        .bg-navy { background-color: #0A0A23; }
+        .teal { color: #00D1B2; }
+        .bg-teal { background-color: #00D1B2; }
+        .aqua { color: #29ABE2; }
+        .bg-aqua { background-color: #29ABE2; }
+        .charcoal { color: #2D2D2D; }
+        .bg-light-grey { background-color: #F7F8FA; }
+        .success-green { color: #2ECC71; }
+        .bg-success-green { background-color: #2ECC71; }
+        .alert-orange { color: #FF8C42; }
+        .bg-alert-orange { background-color: #FF8C42; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0A0A23 0%, #1a1a4e 100%);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon {
+            background: rgba(0, 209, 178, 0.1);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .step-connector {
+            position: relative;
+        }
+        
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: #00D1B2;
+            z-index: 0;
+        }
+        
+        .step-connector:last-child::after {
+            display: none;
+        }
+        
+        @media (max-width: 1024px) {
+            .step-connector::after {
+                display: none;
+            }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .stats-card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Button gradient styling */
+        .btn-gradient {
+            background: linear-gradient(90deg, #0A0A23 0%, #00D1B2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-diagram {
+            position: relative;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: rgba(10, 10, 35, 0.02);
+            border: 1px solid rgba(10, 10, 35, 0.1);
+        }
+
+        .tech-node {
+            position: relative;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+            border-left: 4px solid #00D1B2;
+        }
+
+        .tech-arrow {
+            position: relative;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #0A0A23;
+            opacity: 0.5;
+        }
+
+        .code-block {
+            background-color: #1E293B;
+            color: #E2E8F0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .code-comment {
+            color: #94A3B8;
+        }
+
+        .code-keyword {
+            color: #93C5FD;
+        }
+
+        .code-string {
+            color: #86EFAC;
+        }
+
+        .code-function {
+            color: #FCD34D;
+        }
+
+        .tech-detail-toggle {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 209, 178, 0.1);
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1rem;
+            font-weight: 500;
+            color: #0A0A23;
+            transition: all 0.2s ease;
+        }
+
+        .tech-detail-toggle:hover {
+            background-color: rgba(0, 209, 178, 0.2);
+        }
+
+        .tech-detail-content {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #F8FAFC;
+            border-radius: 0.5rem;
+            border-left: 3px solid #00D1B2;
+        }
+
+        .tech-detail-content.active {
+            display: block;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #0A0A23;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: white;
+            border: 4px solid #00D1B2;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background-color: #e5e7eb;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #00D1B2;
+            border-radius: 6px;
+            transition: width 1s ease-in-out;
+        }
+
+        .ai-metrics-card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .ai-metrics-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .api-doc {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .api-endpoint {
+            color: #0369a1;
+            font-weight: bold;
+        }
+
+        .api-method {
+            color: #059669;
+            font-weight: bold;
+        }
+
+        .api-response {
+            color: #9333ea;
+        }
+
+        .hexagon {
+            position: relative;
+            width: 100px;
+            height: 57.74px; /* height = width * 0.5774 */
+            background-color: rgba(0, 209, 178, 0.1);
+            margin: 28.87px auto;
+        }
+
+        .hexagon:before,
+        .hexagon:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+        }
+
+        .hexagon:before {
+            bottom: 100%;
+            border-bottom: 28.87px solid rgba(0, 209, 178, 0.1);
+        }
+
+        .hexagon:after {
+            top: 100%;
+            border-top: 28.87px solid rgba(0, 209, 178, 0.1);
+        }
+
+        .hexagon-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .process-step {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .process-step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #00D1B2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .process-step-content {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-stack-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .tech-stack-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-stack-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(0, 209, 178, 0.1);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .roadmap-phase {
+            position: relative;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #00D1B2;
+        }
+
+        .roadmap-phase.completed {
+            border-left-color: #2ECC71;
+        }
+
+        .roadmap-phase.current {
+            border-left-color: #29ABE2;
+        }
+
+        .roadmap-phase.future {
+            border-left-color: #0A0A23;
+        }
+
+        .phase-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-badge.completed {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: #2ECC71;
+        }
+
+        .phase-badge.current {
+            background-color: rgba(41, 171, 226, 0.1);
+            color: #29ABE2;
+        }
+
+        .phase-badge.future {
+            background-color: rgba(10, 10, 35, 0.1);
+            color: #0A0A23;
+        }
+    </style>
+</head>
+<body class="bg-light-grey font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold navy">flow<span class="teal">ly</span></a>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="index.html#how-it-works" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            How It Works
+                        </a>
+                        <a href="index.html#why-flowly" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Why Flowly
+                        </a>
+                        <a href="index.html#partners" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            For Partners
+                        </a>
+                        <a href="index.html#about" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            About
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html#contact" class="hidden md:inline-flex btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-envelope mr-2"></i>Contact Us
+                    </a>
+                    <a href="flowly-waitlist.html" class="hidden md:inline-flex btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-clock mr-2"></i>Join the Waitlist
+                    </a>
+                    <a href="/frontend/flowly-business-dashboard.tsx" class="btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-circle mr-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative gradient-bg">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute right-0 top-0 transform translate-x-1/4 -translate-y-1/4">
+                <div class="w-96 h-96 bg-teal opacity-10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="absolute left-0 bottom-0 transform -translate-x-1/4 translate-y-1/4">
+                <div class="w-96 h-96 bg-aqua opacity-10 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
+                    Our Advanced <span class="text-teal">AI Technology</span>
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-300">
+                    The revolutionary verification system that transforms invoice factoring from days to seconds
+                </p>
+                <div class="mt-10 flex justify-center">
+                    <a href="#ai-system" class="bg-teal hover:bg-opacity-90 text-white px-8 py-3 rounded-md text-lg font-medium shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        Explore Our Technology
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AI System Overview Section -->
+    <div id="ai-system" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">AI Verification System</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Transforming Factoring with AI
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Our proprietary multi-layered verification technology changes the factoring game forever
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold navy mb-6">The Problem with Traditional Verification</h3>
+                    <p class="text-gray-600 mb-6">
+                        Invoice factoring has traditionally been a labor-intensive process, relying on manual review of documents and slow verification methods:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600"><span class="font-medium navy">Days-long verification:</span> Traditional factoring requires manual document review taking 2-5 business days.</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600"><span class="font-medium navy">Human error rate:</span> Manual processes introduce inconsistencies and subjective judgment.</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600"><span class="font-medium navy">Limited fraud prevention:</span> Traditional systems struggle to identify sophisticated fraud patterns.</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600"><span class="font-medium navy">Fixed pricing models:</span> Risk assessment limitations force high, inflexible fees.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="bg-light-grey rounded-xl p-8 shadow-sm">
+                        <h3 class="text-xl font-bold navy mb-6">Flowly's AI Solution</h3>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-robot text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Multi-Layered Verification</h4>
+                                    <p class="mt-1 text-gray-600">Our AI analyzes documents, geo-locations, work evidence, and historical patterns simultaneously.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-bolt text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">60-Second Verification</h4>
+                                    <p class="mt-1 text-gray-600">What takes days with traditional factoring happens in under a minute with our technology.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-shield-alt text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Enhanced Fraud Protection</h4>
+                                    <p class="mt-1 text-gray-600">Advanced pattern recognition identifies fraudulent submissions with 99.3% accuracy.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-chart-line text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Dynamic Risk Pricing</h4>
+                                    <p class="mt-1 text-gray-600">AI-generated confidence scores enable precise risk assessment and optimized pricing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="mt-20">
+                <h3 class="text-2xl font-bold navy mb-8 text-center">AI Verification Metrics</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="bg-white rounded-xl shadow-sm p-6 text-center ai-metrics-card">
+                        <div class="text-5xl font-bold navy mb-2">
+                            <span class="text-teal">&lt;</span>60<span class="text-teal">s</span>
+                        </div>
+                        <div class="text-lg font-medium navy">Verification Time</div>
+                        <p class="mt-2 text-gray-500 text-sm">Average processing time from document upload to verification complete</p>
+                        <div class="progress-bar mt-4">
+                            <div class="progress-fill" style="width: 95%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500">vs. 2-5 days traditional</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm p-6 text-center ai-metrics-card">
+                        <div class="text-5xl font-bold navy mb-2">
+                            <span class="text-teal">99.7</span>%
+                        </div>
+                        <div class="text-lg font-medium navy">Document Accuracy</div>
+                        <p class="mt-2 text-gray-500 text-sm">Information extraction precision compared to human review</p>
+                        <div class="progress-bar mt-4">
+                            <div class="progress-fill" style="width: 99.7%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500">vs. 92% human accuracy</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm p-6 text-center ai-metrics-card">
+                        <div class="text-5xl font-bold navy mb-2">
+                            <span class="text-teal">99.3</span>%
+                        </div>
+                        <div class="text-lg font-medium navy">Fraud Detection</div>
+                        <p class="mt-2 text-gray-500 text-sm">Ability to identify fraudulent or manipulated documents</p>
+                        <div class="progress-bar mt-4">
+                            <div class="progress-fill" style="width: 99.3%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500">vs. 85% traditional methods</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm p-6 text-center ai-metrics-card">
+                        <div class="text-5xl font-bold navy mb-2">
+                            <span class="text-teal">24</span>h
+                        </div>
+                        <div class="text-lg font-medium navy">Time to Funding</div>
+                        <p class="mt-2 text-gray-500 text-sm">Maximum wait time from verification to funds in account</p>
+                        <div class="progress-bar mt-4">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500">vs. 5-10 days traditional</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+    <!-- Technical Architecture Section -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Technical Architecture</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Enterprise-Grade Infrastructure
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Built for scale, security, and real-time processing
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="hexagon">
+                            <div class="hexagon-content">
+                                <i class="fas fa-desktop text-teal text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4 text-center">Frontend</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">React/TypeScript SPA with mobile-responsive design</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Progressive Web App capabilities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Native iOS/Android apps</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Client-side encryption</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="hexagon">
+                            <div class="hexagon-content">
+                                <i class="fas fa-server text-teal text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4 text-center">API Layer</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">RESTful API with GraphQL endpoints</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">JWT authentication + MFA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Rate limiting & throttling</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Comprehensive API docs</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="hexagon">
+                            <div class="hexagon-content">
+                                <i class="fas fa-network-wired text-teal text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4 text-center">Backend</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Kubernetes microservices</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Kafka message queue</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Parallel verification streams</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Async notification system</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="hexagon">
+                            <div class="hexagon-content">
+                                <i class="fas fa-database text-teal text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4 text-center">Data Layer</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">MongoDB document storage</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">PostgreSQL transactions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Redis caching</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">S3-compatible storage</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verification Process Flow -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Process Flow</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    AI-Powered Verification Workflow
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    How our system validates invoices in under 60 seconds
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div class="process-step">
+                    <div class="process-step-number">1</div>
+                    <div class="process-step-content">
+                        <h3 class="text-lg font-bold navy mb-2">Document Ingestion</h3>
+                        <p class="text-gray-600 text-sm">Multi-format support with auto-classification</p>
+                        <div class="mt-4">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+                                <span>PDF, JPG, PNG, DOCX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-step-number">2</div>
+                    <div class="process-step-content">
+                        <h3 class="text-lg font-bold navy mb-2">AI Processing</h3>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-teal text-xs mt-1 mr-2"></i>
+                                Parallel verification engines
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-teal text-xs mt-1 mr-2"></i>
+                                Contextual understanding
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-teal text-xs mt-1 mr-2"></i>
+                                Fraud pattern detection
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-step-number">3</div>
+                    <div class="process-step-content">
+                        <h3 class="text-lg font-bold navy mb-2">Confidence Scoring</h3>
+                        <div class="space-y-3">
+                            <div class="text-sm">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-600">Document Quality</span>
+                                    <span class="font-medium text-teal">25%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div class="text-sm">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-600">Geo-Verification</span>
+                                    <span class="font-medium text-teal">20%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 20%"></div>
+                                </div>
+                            </div>
+                            <div class="text-sm">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-600">Client History</span>
+                                    <span class="font-medium text-teal">15%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 15%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-step-number">4</div>
+                    <div class="process-step-content">
+                        <h3 class="text-lg font-bold navy mb-2">Partner Matching</h3>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-teal text-xs mt-1 mr-2"></i>
+                                Automated API submissions
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-teal text-xs mt-1 mr-2"></i>
+                                Dynamic fee structures
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-teal text-xs mt-1 mr-2"></i>
+                                Risk profile generation
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-step-number">5</div>
+                    <div class="process-step-content">
+                        <h3 class="text-lg font-bold navy mb-2">Payment Orchestration</h3>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-clock text-teal mr-2"></i>
+                            <span>Funds deposited within 24 hours</span>
+                        </div>
+                        <div class="mt-3">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-shield-alt text-teal mr-2"></i>
+                                <span>SOC2 compliant transactions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Technology Layers Section -->
+
+    <!-- Key Performance Metrics -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Performance Metrics</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Industry-Leading Verification Metrics
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Quantifiable results that redefine factoring efficiency
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl shadow-sm p-6 text-center ai-metrics-card">
+                    <div class="text-4xl font-bold navy mb-2">
+                        <span class="text-teal">99.7</span>%
+                    </div>
+                    <div class="text-lg font-medium navy">Document Accuracy</div>
+                    <p class="mt-2 text-gray-500 text-sm">Classification and entity extraction precision</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-6 text-center ai-metrics-card">
+                    <div class="text-4xl font-bold navy mb-2">
+                        <span class="text-teal"><60</span>s
+                    </div>
+                    <div class="text-lg font-medium navy">Verification Time</div>
+                    <p class="mt-2 text-gray-500 text-sm">Average processing time per document</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-6 text-center ai-metrics-card">
+                    <div class="text-4xl font-bold navy mb-2">
+                        <span class="text-teal">95</span>%
+                    </div>
+                    <div class="text-lg font-medium navy">Error Reduction</div>
+                    <p class="mt-2 text-gray-500 text-sm">Decrease in manual review requirements</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-6 text-center ai-metrics-card">
+                    <div class="text-4xl font-bold navy mb-2">
+                        <span class="text-teal">24</span>h
+                    </div>
+                    <div class="text-lg font-medium navy">Funding Speed</div>
+                    <p class="mt-2 text-gray-500 text-sm">Maximum time to funds disbursement</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Partner Integration Options -->
+    <div class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Integrations</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Flexible Partner Integration Options
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Seamless integration with your existing systems
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <h3 class="text-xl font-bold navy mb-4">REST API</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">OpenAPI 3.0 specification</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Real-time webhook integration</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Customizable notifications</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <h3 class="text-xl font-bold navy mb-4">White-Label Solution</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Fully branded integration</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Custom verification workflows</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Dedicated support team</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Development Roadmap -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Roadmap</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Strategic Development Timeline
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Our phased approach to revolutionizing invoice factoring
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="roadmap-phase completed">
+                    <div class="phase-badge completed">Completed</div>
+                    <h3 class="text-xl font-bold navy mb-2">Core Verification System</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>Basic document OCR & entity extraction</li>
+                        <li>Initial verification algorithm</li>
+                        <li>Prototype partner API</li>
+                    </ul>
+                </div>
+
+                <div class="roadmap-phase current">
+                    <div class="phase-badge current">Current</div>
+                    <h3 class="text-xl font-bold navy mb-2">Enhanced Verification</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>Advanced computer vision</li>
+                        <li>Geo-verification system</li>
+                        <li>Mobile documentation app</li>
+                    </ul>
+                </div>
+
+                <div class="roadmap-phase future">
+                    <div class="phase-badge future">2025-2026</div>
+                    <h3 class="text-xl font-bold navy mb-2">Intelligent Automation</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>ML model continuous improvement</li>
+                        <li>Predictive risk analytics</li>
+                        <li>Automated underwriting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Technology Layers</span>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Multi-Layered Verification System
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Our proprietary AI verification technology uses four integrated layers
+                </p>
+            </div>
+
+            <!-- Verification Layers -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="hexagon">
+                            <div class="hexagon-content">
+                                <i class="fas fa-file-alt text-teal text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4 text-center">Document Analysis Layer</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Computer vision OCR optimized for construction invoices</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Entity recognition for business names, amounts, dates, services</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Document classification (invoices, work orders, completion certificates)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Tampering detection to identify altered documents</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="hexagon">
+                            <div class="hexagon-content">
+                                <i class="fas fa-map-marker-alt text-teal text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4 text-center">Geo-Verification Layer</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Location validation comparing work site coordinates with documentation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Timestamp verification ensuring photos were taken during expected timeframes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Device fingerprinting to validate consistent documentation sources</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Weather data cross-referencing to validate outdoor work conditions</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="hexagon">
+                            <div class="hexagon-content">
+                                <i class="fas fa-brain text-teal text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4 text-center">Cross-Document Intelligence</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Semantic matching between work orders, invoices, and completion documents</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Consistency verification across all submitted documentation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Historical pattern analysis comparing to previous submissions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Client signature validation with behavioral biometrics</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="hexagon">
+                            <div class="hexagon-content">
+                                <i class="fas fa-chart-pie text-teal text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4 text-center">Risk Assessment Engine</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Dynamic scoring algorithm weighing multiple verification factors</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Client history analysis incorporating payment records</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Industry-specific risk models for different blue-collar sectors</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-gray-600">Confidence scoring that directly influences factoring fees</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
