@@ -8,15 +8,104 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Inherit all styles from index.html */
-        body { font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
         .navy { color: #0A0A23; }
+        .bg-navy { background-color: #0A0A23; }
         .teal { color: #00D1B2; }
+        .bg-teal { background-color: #00D1B2; }
+        .aqua { color: #29ABE2; }
+        .bg-aqua { background-color: #29ABE2; }
+        .charcoal { color: #2D2D2D; }
         .bg-light-grey { background-color: #F7F8FA; }
+        .success-green { color: #2ECC71; }
+        .bg-success-green { background-color: #2ECC71; }
+        .alert-orange { color: #FF8C42; }
+        .bg-alert-orange { background-color: #FF8C42; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0A0A23 0%, #1a1a4e 100%);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon {
+            background: rgba(0, 209, 178, 0.1);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .step-connector {
+            position: relative;
+        }
+        
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: #00D1B2;
+            z-index: 0;
+        }
+        
+        .step-connector:last-child::after {
+            display: none;
+        }
+        
+        @media (max-width: 1024px) {
+            .step-connector::after {
+                display: none;
+            }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .stats-card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Button gradient styling */
+        .btn-gradient {
+            background: linear-gradient(90deg, #0A0A23 0%, #00D1B2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
-<body class="bg-light-grey">
-    <!-- Navigation - Same as index.html -->
+<body class="bg-light-grey font-sans">
+    <!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -24,10 +113,30 @@
                     <div class="flex-shrink-0 flex items-center">
                         <span class="text-2xl font-bold navy">flow<span class="teal">ly</span></span>
                     </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="#how-it-works" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            How It Works
+                        </a>
+                        <a href="#why-flowly" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Why Flowly
+                        </a>
+                        <a href="#partners" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            For Partners
+                        </a>
+                        <a href="#about" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            About
+                        </a>
+                    </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="index.html" class="btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                    <a href="#contact" class="hidden md:inline-flex btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-envelope mr-2"></i>Contact Us
+                    </a>
+                    <a href="flowly-waitlist.html" class="hidden md:inline-flex btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-clock mr-2"></i>Join the Waitlist
+                    </a>
+                    <a href="/frontend/flowly-business-dashboard.tsx" class="btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-circle mr-2"></i>Login
                     </a>
                 </div>
             </div>
