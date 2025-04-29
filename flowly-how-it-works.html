@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works | Flowly - Technical Architecture & Process</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .navy { color: #0A0A23; }
+        .bg-navy { background-color: #0A0A23; }
+        .teal { color: #00D1B2; }
+        .bg-teal { background-color: #00D1B2; }
+        .aqua { color: #29ABE2; }
+        .bg-aqua { background-color: #29ABE2; }
+        .charcoal { color: #2D2D2D; }
+        .bg-light-grey { background-color: #F7F8FA; }
+        .success-green { color: #2ECC71; }
+        .bg-success-green { background-color: #2ECC71; }
+        .alert-orange { color: #FF8C42; }
+        .bg-alert-orange { background-color: #FF8C42; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0A0A23 0%, #1a1a4e 100%);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon {
+            background: rgba(0, 209, 178, 0.1);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .step-connector {
+            position: relative;
+        }
+        
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: #00D1B2;
+            z-index: 0;
+        }
+        
+        .step-connector:last-child::after {
+            display: none;
+        }
+        
+        @media (max-width: 1024px) {
+            .step-connector::after {
+                display: none;
+            }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .stats-card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .tech-diagram {
+            position: relative;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: rgba(10, 10, 35, 0.02);
+            border: 1px solid rgba(10, 10, 35, 0.1);
+        }
+
+        .tech-node {
+            position: relative;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+            border-left: 4px solid #00D1B2;
+        }
+
+        .tech-arrow {
+            position: relative;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #0A0A23;
+            opacity: 0.5;
+        }
+
+        .code-block {
+            background-color: #1E293B;
+            color: #E2E8F0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .code-comment {
+            color: #94A3B8;
+        }
+
+        .code-keyword {
+            color: #93C5FD;
+        }
+
+        .code-string {
+            color: #86EFAC;
+        }
+
+        .code-function {
+            color: #FCD34D;
+        }
+
+        .tech-detail-toggle {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 209, 178, 0.1);
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1rem;
+            font-weight: 500;
+            color: #0A0A23;
+            transition: all 0.2s ease;
+        }
+
+        .tech-detail-toggle:hover {
+            background-color: rgba(0, 209, 178, 0.2);
+        }
+
+        .tech-detail-content {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #F8FAFC;
+            border-radius: 0.5rem;
+            border-left: 3px solid #00D1B2;
+        }
+
+        .tech-detail-content.active {
+            display: block;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #0A0A23;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: white;
+            border: 4px solid #00D1B2;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid #F7F8FA;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #F7F8FA;
+        }
+
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid #F7F8FA;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #F7F8FA transparent transparent;
+        }
+
+        .right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-container::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+
+            .left::after, .right::after {
+                left: 18px;
+            }
+
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light-grey font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold navy">flow<span class="teal">ly</span></a>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="#technical-overview" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Technical Overview
+                        </a>
+                        <a href="#verification-system" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Verification System
+                        </a>
+                        <a href="#architecture" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Architecture
+                        </a>
+                        <a href="#scalability" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Scalability
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html#contact" class="hidden md:inline-flex bg-teal hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        Contact Us
+                    </a>
+                    <a href="/frontend/flowly-business-dashboard.tsx" class="bg-navy hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-circle mr-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative gradient-bg">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute right-0 top-0 transform translate-x-1/4 -translate-y-1/4">
+                <div class="w-96 h-96 bg-teal opacity-10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="absolute left-0 bottom-0 transform -translate-x-1/4 translate-y-1/4">
+                <div class="w-96 h-96 bg-aqua opacity-10 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
+                    How <span class="text-teal">Flowly</span> Works
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-300">
+                    A deep dive into our technical architecture, verification system, and business model
+                </p>
+                <div class="mt-10 flex justify-center">
+                    <a href="#technical-overview" class="bg-teal hover:bg-opacity-90 text-white px-8 py-3 rounded-md text-lg font-medium shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        Explore the Technology
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Technical Overview Section -->
+    <div id="technical-overview" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Technical Overview
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    How we're revolutionizing invoice factoring with AI and modern technology
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold navy mb-6">The Problem with Traditional Factoring</h3>
+                    <p class="text-gray-600 mb-6">
+                        Traditional factoring relies on manual processes that are slow, expensive, and error-prone:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600"><span class="font-medium navy">Manual document review:</span> Human operators must review each invoice and supporting document, introducing delays of days or weeks.</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600"><span class="font-medium navy">Inconsistent verification:</span> Human judgment varies, leading to inconsistent approval rates and risk assessment.</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600"><span class="font-medium navy">Limited fraud detection:</span> Manual systems struggle to detect sophisticated fraud patterns across large datasets.</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600"><span class="font-medium navy">Poor scalability:</span> Adding more customers requires proportionally more staff, limiting growth potential.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="bg-light-grey rounded-xl p-8 shadow-sm">
+                        <h3 class="text-xl font-bold navy mb-6">Our Technical Solution</h3>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-robot text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">AI-Powered Verification</h4>
+                                    <p class="mt-1 text-gray-600">Computer vision and NLP algorithms that can process and verify documents in seconds instead of days.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-microchip text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Microservices Architecture</h4>
+                                    <p class="mt-1 text-gray-600">Distributed system design that enables horizontal scaling and high availability.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-shield-alt text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Multi-Point Verification</h4>
+                                    <p class="mt-1 text-gray-600">Cross-referencing multiple data sources to ensure authenticity and reduce fraud risk.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-chart-line text-teal"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Machine Learning Risk Models</h4>
+                                    <p class="mt-1 text-gray-600">Continuously improving algorithms that assess risk and optimize pricing in real-time.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="mt-20">
+                <h3 class="text-2xl font-bold navy mb-8 text-center">Key Performance Metrics</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                        <div class="text-5xl font-bold navy mb-2">
+                            <span class="text-teal">&lt;</span>60<span class="text-teal">s</span>
+                        </div>
+                        <div class="text-lg font-medium navy">Verification Time</div>
+                        <p class="mt-2 text-gray-500 text-sm">Average time to verify an invoice and supporting documentation</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                        <div class="text-5xl font-bold navy mb-2">
+                            <span class="text-teal">99.7</span>%
+                        </div>
+                        <div class="text-lg font-medium navy">Accuracy Rate</div>
+                        <p class="mt-2 text-gray-500 text-sm">Verification accuracy compared to manual review</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                        <div class="text-5xl font-bold navy mb-2">
+                            <span class="text-teal">24</span>h
+                        </div>
+                        <div class="text-lg font-medium navy">Time to Funding</div>
+                        <p class="mt-2 text-gray-500 text-sm">Maximum time from verification to funds in account</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verification System Section -->
+    <div id="verification-system" class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    AI Verification System
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Our proprietary multi-layered verification technology
+                </p>
+            </div>
+
+            <!-- Verification Process Diagram -->
+            <div class="bg-white rounded-xl shadow-sm p-8 mb-16">
+                <h3 class="text-xl font-bold navy mb-8">Verification Process Flow</h3>
+                
+                <div class="tech-diagram">
+                    <div class="tech-node">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                <i class="fas fa-file-upload text-teal"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold navy">Document Ingestion</h4>
+                                <p class="text-sm text-gray-500">Multi-format support: PDF, JPG, PNG, DOCX</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    
+                    <div class="tech-node">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                <i class="fas fa-eye text-teal"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold navy">Computer Vision Analysis</h4>
+                                <p class="text-sm text-gray-500">OCR, document classification, visual anomaly detection</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-detail-toggle" onclick="toggleTechDetail('cv-detail')">
+                            <i class="fas fa-code mr-2"></i> Technical Details
+                        </div>
+                        
+                        <div id="cv-detail" class="tech-detail-content">
+                            <p class="text-sm mb-3">Our computer vision pipeline uses a combination of traditional OCR and deep learning models:</p>
+                            <div class="code-block">
+                                <span class="code-comment"># Document processing pipeline</span><br>
+                                <span class="code-keyword">def</span> <span class="code-function">process_document</span>(document):<br>
+                                &nbsp;&nbsp;<span class="code-comment"># 1. Document classification using ResNet50</span><br>
+                                &nbsp;&nbsp;doc_type = <span class="code-function">classify_document</span>(document)<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-comment"># 2. Region-specific OCR based on document type</span><br>
+                                &nbsp;&nbsp;text_regions = <span class="code-function">extract_text_regions</span>(document, doc_type)<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-comment"># 3. Entity extraction with NER models</span><br>
+                                &nbsp;&nbsp;entities = <span class="code-function">extract_entities</span>(text_regions)<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-comment"># 4. Anomaly detection</span><br>
+                                &nbsp;&nbsp;anomalies = <span class="code-function">detect_anomalies</span>(document, entities)<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-keyword">return</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"document_type"</span>: doc_type,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"extracted_data"</span>: entities,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"anomalies"</span>: anomalies<br>
+                                &nbsp;&nbsp;}
+                            </div>
+                            <p class="text-sm mt-3">The system achieves 99.2% accuracy on invoice recognition and 98.7% on field extraction.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    
+                    <div class="tech-node">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                <i class="fas fa-language text-teal"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold navy">Natural Language Processing</h4>
+                                <p class="text-sm text-gray-500">Entity extraction, semantic analysis, cross-document validation</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    
+                    <div class="tech-node">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-teal"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold navy">Geo-Verification System</h4>
+                                <p class="text-sm text-gray-500">Location validation, timestamp verification, metadata analysis</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-detail-toggle" onclick="toggleTechDetail('geo-detail')">
+                            <i class="fas fa-code mr-2"></i> Technical Details
+                        </div>
+                        
+                        <div id="geo-detail" class="tech-detail-content">
+                            <p class="text-sm mb-3">Our geo-verification system uses multiple data points to confirm work location:</p>
+                            <ul class="text-sm space-y-2 mb-3">
+                                <li><span class="font-medium">EXIF Data Analysis:</span> Extracts and validates metadata from photos</li>
+                                <li><span class="font-medium">GPS Coordinate Validation:</span> Confirms location matches the work site</li>
+                                <li><span class="font-medium">Timestamp Verification:</span> Ensures photos were taken during the expected timeframe</li>
+                                <li><span class="font-medium">Device Fingerprinting:</span> Validates that photos come from expected devices</li>
+                            </ul>
+                            <div class="code-block">
+                                <span class="code-comment">// Geo-verification logic</span><br>
+                                <span class="code-keyword">function</span> <span class="code-function">verifyLocationData</span>(photoMetadata, workOrder) {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">const</span> photoCoordinates = extractGpsCoordinates(photoMetadata);<br>
+                                &nbsp;&nbsp;<span class="code-keyword">const</span> workSiteCoordinates = workOrder.siteLocation;<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-comment">// Calculate distance between coordinates</span><br>
+                                &nbsp;&nbsp;<span class="code-keyword">const</span> distance = calculateDistance(photoCoordinates, workSiteCoordinates);<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-comment">// Verify timestamp is within work period</span><br>
+                                &nbsp;&nbsp;<span class="code-keyword">const</span> photoTimestamp = photoMetadata.timestamp;
+                                &nbsp;&nbsp;<span class="code-keyword">const</span> isWithinWorkPeriod = checkTimeframe(photoTimestamp, workOrder.startDate, workOrder.endDate);<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-keyword">return</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;locationMatch: distance < MAX_ALLOWED_DISTANCE,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;timeframeValid: isWithinWorkPeriod,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;confidenceScore: calculateConfidenceScore(distance, isWithinWorkPeriod)<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    
+                    <div class="tech-node">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                <i class="fas fa-fingerprint text-teal"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold navy">Fraud Detection System</h4>
+                                <p class="text-sm text-gray-500">Pattern recognition, anomaly detection, historical analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    
+                    <div class="tech-node">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                <i class="fas fa-check-double text-teal"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold navy">Confidence Scoring</h4>
+                                <p class="text-sm text-gray-500">Multi-factor weighted algorithm, risk assessment, pricing optimization</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-detail-toggle" onclick="toggleTechDetail('confidence-detail')">
+                            <i class="fas fa-code mr-2"></i> Technical Details
+                        </div>
+                        
+                        <div id="confidence-detail" class="tech-detail-content">
+                            <p class="text-sm mb-3">Our confidence scoring algorithm combines multiple verification factors:</p>
+                            <div class="code-block">
+                                <span class="code-comment">// Confidence scoring algorithm</span><br>
+                                <span class="code-keyword">function</span> <span class="code-function">calculateConfidenceScore</span>(verificationResults) {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">const</span> weights = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;documentQuality: 0.25,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;entityExtraction: 0.20,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;geoVerification: 0.20,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;clientHistory: 0.15,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;debtorHistory: 0.20<br>
+                                &nbsp;&nbsp;};<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-keyword">let</span> score = 0;<br>
+                                &nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">const</span> factor in weights) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;score += verificationResults[factor] * weights[factor];<br>
+                                &nbsp;&nbsp;}<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-comment">// Apply risk modifiers</span><br>
+                                &nbsp;&nbsp;<span class="code-keyword">const</span> riskModifier = calculateRiskModifier(verificationResults);<br>
+                                &nbsp;&nbsp;score *= riskModifier;<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-keyword">return</span> Math.min(Math.max(score, 0), 1); <span class="code-comment">// Normalize to 0-1</span><br>
+                                }
+                            </div>
+                            <p class="text-sm mt-3">This score directly influences the factoring fee, with higher confidence scores resulting in lower fees for the business.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Multi-Point Verification -->
+            <div class="bg-white rounded-xl shadow-sm p-8">
+                <h3 class="text-xl font-bold navy mb-8">Multi-Point Verification System</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold navy mb-4">Document Analysis</h4>
+                        <p class="text-gray-600 mb-4">Our document analysis system uses advanced computer vision and NLP techniques to extract and verify information from invoices and supporting documents.</p>
+                        
+                        <ul class="space-y-3">
+                            <li class="flex">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-check text-teal text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600"><span class="font-medium navy">OCR Enhancement:</span> Custom-trained OCR models optimized for construction and trade invoices.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-check text-teal text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600"><span class="font-medium navy">Entity Recognition:</span> Specialized NER models identify business entities, amounts, dates, and service descriptions.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-check text-teal text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600"><span class="font-medium navy">Tampering Detection:</span> Image analysis algorithms detect document alterations or manipulations.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-check text-teal text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600"><span class="font-medium navy">Cross-Document Validation:</span> Ensures consistency across invoice, work order, and completion documents.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold navy mb-4">Visual Proof Verification</h4>
+                        <p class="text-gray-600 mb-4">Our system analyzes visual evidence of work completion using advanced image recognition technology.</p>
+                        
+                        <ul class="space-y-3">
+                            <li class="flex">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-check text-teal text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600"><span class="font-medium navy">Before/After Comparison:</span> Computer vision algorithms compare before/after photos to verify work completion.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-check text-teal text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600"><span class="font-medium navy">Geo-tagging Validation:</span> Confirms photos were taken at the expected work location.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-check text-teal text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600"><span class="font-medium navy">Timestamp Analysis:</span> Verifies photos were taken within the expected timeframe.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-check text-teal text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600"><span class="font-medium navy">Image Authenticity:</span> Detects manipulated or stock photos using digital fingerprinting.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Technical Architecture Section -->
+    <div id="architecture" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Technical Architecture
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Our modern, scalable system design
+                </p>
+            </div>
+
+            <!-- Architecture Diagram -->
+            <div class="bg-white rounded-xl shadow-sm p-8 mb-16">
+                <h3 class="text-xl font-bold navy mb-8">System Architecture</h3>
+                
+                <div class="bg-light-grey p-8 rounded-xl">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="text-lg font-semibold navy mb-4">Frontend Layer</h4>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">React/TypeScript:</span> Single-page application architecture</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">TailwindCSS:</span> Responsive design framework</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Progressive Web App:</span> Offline capabilities</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Native Mobile Apps:</span> iOS and Android</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="text-lg font-semibold navy mb-4">API Layer</h4>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Node.js/Express:</span> RESTful API services</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">GraphQL:</span> Flexible data querying</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">JWT Authentication:</span> Secure access control</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">API Gateway:</span> Request routing and throttling</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="text-lg font-semibold navy mb-4">Backend Services</h4>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Microservices:</span> Domain-driven design</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Python/TensorFlow:</span> ML processing</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Event-Driven:</span> Kafka message queue</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Containerized:</span> Docker & Kubernetes</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="text-lg font-semibold navy mb-4">Data Layer</h4>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">MongoDB:</span> Document storage for flexible schemas</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">PostgreSQL:</span> Relational data with ACID compliance</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Redis:</span> In-memory caching for performance</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">S3-compatible:</span> Document and image storage</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="text-lg font-semibold navy mb-4">DevOps & Infrastructure</h4>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">AWS Cloud:</span> Primary infrastructure provider</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">CI/CD Pipeline:</span> Automated testing and deployment</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Infrastructure as Code:</span> Terraform configuration</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-circle text-teal text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-600"><span class="font-medium navy">Monitoring:</span> Prometheus, Grafana, ELK stack</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <span class="text-2xl font-bold text-white">flow<span class="teal">ly</span></span>
+                    <p class="text-gray-300 mt-2">Instant Cash Flow for Blue-Collar Businesses</p>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="index.html#about" class="text-gray-300 hover:text-white">About</a></li>
+                        <li><a href="flowly-careers.html" class="text-gray-300 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Contact</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-envelope mr-2 text-teal"></i>
+                            hello@getflowly.ca
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-globe mr-2 text-teal"></i>
+                            www.getflowly.ca
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Flowly. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTechDetail(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

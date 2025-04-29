@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers | Flowly - Join Our Team</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .navy { color: #0A0A23; }
+        .bg-navy { background-color: #0A0A23; }
+        .teal { color: #00D1B2; }
+        .bg-teal { background-color: #00D1B2; }
+        .aqua { color: #29ABE2; }
+        .bg-aqua { background-color: #29ABE2; }
+        .charcoal { color: #2D2D2D; }
+        .bg-light-grey { background-color: #F7F8FA; }
+        .success-green { color: #2ECC71; }
+        .bg-success-green { background-color: #2ECC71; }
+        .alert-orange { color: #FF8C42; }
+        .bg-alert-orange { background-color: #FF8C42; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0A0A23 0%, #1a1a4e 100%);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon {
+            background: rgba(0, 209, 178, 0.1);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-light-grey font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold navy">flow<span class="teal">ly</span></a>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="index.html#how-it-works" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            How It Works
+                        </a>
+                        <a href="index.html#why-flowly" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Why Flowly
+                        </a>
+                        <a href="index.html#partners" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            For Partners
+                        </a>
+                        <a href="index.html#about" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            About
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html#contact" class="hidden md:inline-flex bg-teal hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        Contact Us
+                    </a>
+                    <a href="/frontend/flowly-business-dashboard.tsx" class="bg-navy hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-circle mr-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative gradient-bg">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute right-0 top-0 transform translate-x-1/4 -translate-y-1/4">
+                <div class="w-96 h-96 bg-teal opacity-10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="absolute left-0 bottom-0 transform -translate-x-1/4 translate-y-1/4">
+                <div class="w-96 h-96 bg-aqua opacity-10 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
+                    Careers at <span class="text-teal">Flowly</span>
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-300">
+                    Join us in revolutionizing cash flow for blue-collar businesses
+                </p>
+                <div class="mt-10 flex justify-center">
+                    <a href="#stay-connected" class="bg-teal hover:bg-opacity-90 text-white px-8 py-3 rounded-md text-lg font-medium shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        Stay Connected
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hiring Soon Section -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block p-3 rounded-full bg-teal bg-opacity-10 mb-4">
+                    <i class="fas fa-rocket text-teal text-3xl"></i>
+                </div>
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    We're Hiring Soon
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Flowly is preparing to expand our team as we grow
+                </p>
+            </div>
+
+            <div class="bg-light-grey rounded-xl p-8 shadow-sm">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold navy">Building the Future of Blue-Collar Finance</h3>
+                    <p class="mt-4 text-gray-600 max-w-3xl mx-auto">
+                        While we're not actively hiring at the moment, we're gearing up to bring on talented individuals who are passionate about transforming how blue-collar businesses manage their cash flow. If you're excited about fintech innovation and want to make a real difference for hardworking business owners, we'd love to connect with you.
+                    </p>
+                </div>
+                
+                <div class="flex justify-center">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-teal bg-opacity-20 text-teal">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span class="font-medium">Check back soon for open positions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Future Roles Section -->
+    <div class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Future Opportunities
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Roles we'll be looking to fill as we grow
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt text-2xl text-teal"></i>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4">Security Coding Developer</h3>
+                    <p class="text-gray-600 mb-4">
+                        Build and maintain secure systems that protect sensitive financial data and ensure compliance with industry regulations.
+                    </p>
+                    <div class="mt-6">
+                        <div class="text-sm font-medium navy mb-2">Key Skills:</div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Cybersecurity</span>
+                            <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Full-Stack</span>
+                            <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">FinTech</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-balance-scale text-2xl text-teal"></i>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4">Legal Counsel</h3>
+                    <p class="text-gray-600 mb-4">
+                        Guide our compliance strategy and legal framework as we navigate the financial services landscape and scale our operations.
+                    </p>
+                    <div class="mt-6">
+                        <div class="text-sm font-medium navy mb-2">Key Skills:</div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Financial Regulations</span>
+                            <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Contracts</span>
+                            <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Startup Experience</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-8 card-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain text-2xl text-teal"></i>
+                    </div>
+                    <h3 class="text-xl font-bold navy mb-4">AI/ML Engineer</h3>
+                    <p class="text-gray-600 mb-4">
+                        Enhance our verification systems and risk models using cutting-edge machine learning and computer vision technologies.
+                    </p>
+                    <div class="mt-6">
+                        <div class="text-sm font-medium navy mb-2">Key Skills:</div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                            <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Computer Vision</span>
+                            <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">NLP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Join Us Section -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Why Join Flowly
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Be part of something transformative
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="space-y-8">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal bg-opacity-10">
+                                    <i class="fas fa-chart-line text-teal text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium navy">Equity Opportunities</h4>
+                                <p class="mt-1 text-gray-600">Join early and grow with us. As a startup, we offer competitive equity packages that allow you to share in our success.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal bg-opacity-10">
+                                    <i class="fas fa-lightbulb text-teal text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium navy">Meaningful Impact</h4>
+                                <p class="mt-1 text-gray-600">Your work will directly help blue-collar business owners solve their most pressing financial challenges.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal bg-opacity-10">
+                                    <i class="fas fa-rocket text-teal text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium navy">Startup Culture</h4>
+                                <p class="mt-1 text-gray-600">Experience the excitement of building something from the ground up in a fast-paced, innovative environment.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal bg-opacity-10">
+                                    <i class="fas fa-users text-teal text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium navy">Diverse Challenges</h4>
+                                <p class="mt-1 text-gray-600">Work across multiple domains and tackle interesting problems at the intersection of finance, technology, and blue-collar industries.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-light-grey rounded-xl p-8 shadow-sm">
+                        <h3 class="text-xl font-bold navy mb-6">Our Values</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                        <i class="fas fa-handshake text-teal"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold navy">Trust & Transparency</h4>
+                                        <p class="text-sm text-gray-600 mt-1">We build trust through honest communication and transparent processes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                        <i class="fas fa-bolt text-teal"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold navy">Speed & Simplicity</h4>
+                                        <p class="text-sm text-gray-600 mt-1">We value efficient solutions that make complex problems simple.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                        <i class="fas fa-tools text-teal"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold navy">Blue-Collar Focus</h4>
+                                        <p class="text-sm text-gray-600 mt-1">We're dedicated to serving the unique needs of trades and construction businesses.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-4">
+                                        <i class="fas fa-robot text-teal"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold navy">Tech-Forward</h4>
+                                        <p class="text-sm text-gray-600 mt-1">We embrace cutting-edge technology to solve traditional industry problems.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stay Connected Section -->
+    <div id="stay-connected" class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Stay Connected
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Be the first to know when we start hiring
+                </p>
+            </div>
+
+            <div class="max-w-lg mx-auto">
+                <div class="bg-white shadow-sm rounded-xl overflow-hidden">
+                    <div class="bg-navy px-6 py-4 text-white">
+                        <h3 class="text-lg font-medium">Join Our Talent Network</h3>
+                    </div>
+                    <form class="p-6">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                                <div class="mt-1">
+                                    <input type="text" name="name" id="name" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <div class="mt-1">
+                                    <input type="email" name="email" id="email" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="linkedin" class="block text-sm font-medium text-gray-700">LinkedIn Profile (optional)</label>
+                                <div class="mt-1">
+                                    <input type="url" name="linkedin" id="linkedin" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="interest" class="block text-sm font-medium text-gray-700">Areas of Interest</label>
+                                <div class="mt-1">
+                                    <select id="interest" name="interest" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                        <option value="">Select an area</option>
+                                        <option value="engineering">Engineering</option>
+                                        <option value="security">Security</option>
+                                        <option value="legal">Legal</option>
+                                        <option value="product">Product</option>
+                                        <option value="operations">Operations</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700">Message (optional)</label>
+                                <div class="mt-1">
+                                    <textarea id="message" name="message" rows="4" placeholder="Tell us a bit about yourself and why you're interested in Flowly" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal"></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-teal hover:bg-opacity-90 text-white py-3 px-4 rounded-md shadow-sm text-sm font-medium transition duration-150 ease-in-out">
+                                    Join Talent Network
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <span class="text-2xl font-bold text-white">flow<span class="teal">ly</span></span>
+                    <p class="text-gray-300 mt-2">Instant Cash Flow for Blue-Collar Businesses</p>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="index.html#about" class="text-gray-300 hover:text-white">About</a></li>
+                        <li><a href="flowly-careers.html" class="text-teal hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Contact</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-envelope mr-2 text-teal"></i>
+                            hello@getflowly.ca
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-globe mr-2 text-teal"></i>
+                            www.getflowly.ca
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Flowly. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple JavaScript for smooth scrolling -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

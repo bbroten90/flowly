@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowly | Instant Cash Flow for Blue-Collar Businesses</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .navy { color: #0A0A23; }
+        .bg-navy { background-color: #0A0A23; }
+        .teal { color: #00D1B2; }
+        .bg-teal { background-color: #00D1B2; }
+        .aqua { color: #29ABE2; }
+        .bg-aqua { background-color: #29ABE2; }
+        .charcoal { color: #2D2D2D; }
+        .bg-light-grey { background-color: #F7F8FA; }
+        .success-green { color: #2ECC71; }
+        .bg-success-green { background-color: #2ECC71; }
+        .alert-orange { color: #FF8C42; }
+        .bg-alert-orange { background-color: #FF8C42; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0A0A23 0%, #1a1a4e 100%);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon {
+            background: rgba(0, 209, 178, 0.1);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .step-connector {
+            position: relative;
+        }
+        
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: #00D1B2;
+            z-index: 0;
+        }
+        
+        .step-connector:last-child::after {
+            display: none;
+        }
+        
+        @media (max-width: 1024px) {
+            .step-connector::after {
+                display: none;
+            }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .stats-card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-light-grey font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold navy">flow<span class="teal">ly</span></span>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="#how-it-works" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            How It Works
+                        </a>
+                        <a href="#why-flowly" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Why Flowly
+                        </a>
+                        <a href="#partners" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            For Partners
+                        </a>
+                        <a href="#about" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            About
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#contact" class="hidden md:inline-flex bg-teal hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        Contact Us
+                    </a>
+                    <a href="flowly-registration.html" class="hidden md:inline-flex bg-navy hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-plus mr-2"></i>Register
+                    </a>
+                    <a href="/frontend/flowly-business-dashboard.tsx" class="bg-navy hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-circle mr-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative gradient-bg">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute right-0 top-0 transform translate-x-1/4 -translate-y-1/4">
+                <div class="w-96 h-96 bg-teal opacity-10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="absolute left-0 bottom-0 transform -translate-x-1/4 translate-y-1/4">
+                <div class="w-96 h-96 bg-aqua opacity-10 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-1/2 text-center lg:text-left">
+                    <h1 class="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
+                        Upload Proof. <span class="text-teal">Get Paid Today.</span> Grow Tomorrow.
+                    </h1>
+                    <p class="mt-6 text-xl text-gray-300">
+                        Instant cash flow solution for blue-collar businesses. No more waiting 30-90 days for payment on completed work.
+                    </p>
+                    <div class="mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#how-it-works" class="bg-teal hover:bg-opacity-90 text-white px-8 py-3 rounded-md text-lg font-medium shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                            See How It Works
+                        </a>
+                        <a href="flowly-registration.html" class="bg-navy hover:bg-opacity-90 text-white px-8 py-3 rounded-md text-lg font-medium shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                            <i class="fas fa-user-plus mr-2"></i>Register Now
+                        </a>
+                        <a href="#contact" class="bg-white bg-opacity-10 hover:bg-opacity-20 text-white border border-white border-opacity-20 px-8 py-3 rounded-md text-lg font-medium transition duration-300 ease-in-out">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden lg:block lg:w-1/2 mt-10 lg:mt-0 pl-10">
+                    <div class="relative animate-float">
+                        <!-- Placeholder for hero image - in a real implementation, replace with actual image -->
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-6 shadow-2xl">
+                            <div class="bg-navy bg-opacity-80 rounded-xl p-4 mb-4">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-teal flex items-center justify-center text-white font-bold">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-white font-medium">Invoice Verified</div>
+                                        <div class="text-gray-400 text-sm">$12,850.00</div>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <span class="bg-success-green bg-opacity-20 text-success-green text-xs px-2 py-1 rounded-full">
+                                            Ready for Funding
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white bg-opacity-10 rounded-xl p-4 mb-4">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-teal flex items-center justify-center text-white font-bold">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-white font-medium">Early Payment Offer</div>
+                                        <div class="text-gray-400 text-sm">Available within 24 hours</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-center">
+                                    <div class="text-3xl font-bold text-white">$12,336.00</div>
+                                    <div class="text-teal text-sm mt-1">4% discount applied</div>
+                                </div>
+                                <div class="mt-4">
+                                    <button class="w-full bg-teal text-white py-2 rounded-lg font-medium">
+                                        Accept & Get Paid
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Section -->
+    <div class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    The Cash Flow Crisis
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Blue-collar businesses are being crushed by slow payments.
+                </p>
+            </div>
+            <div class="mt-16 grid gap-8 lg:grid-cols-3">
+                <div class="bg-white p-8 rounded-xl shadow-sm card-hover transition-all duration-300">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-times text-2xl text-teal"></i>
+                    </div>
+                    <div class="text-xl font-semibold navy mb-4">30-90 Day Wait Times</div>
+                    <p class="text-gray-600">Standard payment terms in blue-collar industries force businesses to finance their customers for months.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm card-hover transition-all duration-300">
+                    <div class="feature-icon">
+                        <i class="fas fa-ban text-2xl text-teal"></i>
+                    </div>
+                    <div class="text-xl font-semibold navy mb-4">Missed Opportunities</div>
+                    <p class="text-gray-600">Without access to capital, contractors and trades miss out on new jobs and growth opportunities.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm card-hover transition-all duration-300">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt text-2xl text-teal"></i>
+                    </div>
+                    <div class="text-xl font-semibold navy mb-4">Traditional Factoring Falls Short</div>
+                    <p class="text-gray-600">Existing solutions are slow, expensive, and buried in paperwork and manual reviews.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market Stats Section -->
+    <div class="py-16 bg-navy text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold sm:text-4xl">
+                    A Massive, Underserved Market
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-300">
+                    The opportunity to transform blue-collar finance is enormous.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="stats-card bg-white bg-opacity-5 p-6">
+                    <div class="text-teal text-4xl font-bold mb-2">$1.5T</div>
+                    <div class="text-lg font-medium">U.S. B2B Invoice Market</div>
+                    <div class="mt-2 text-gray-400 text-sm">Annual volume of business-to-business invoices</div>
+                </div>
+                
+                <div class="stats-card bg-white bg-opacity-5 p-6">
+                    <div class="text-teal text-4xl font-bold mb-2">65%</div>
+                    <div class="text-lg font-medium">Late Payment Rate</div>
+                    <div class="mt-2 text-gray-400 text-sm">Of service businesses suffer from late payments</div>
+                </div>
+                
+                <div class="stats-card bg-white bg-opacity-5 p-6">
+                    <div class="text-teal text-4xl font-bold mb-2">8%</div>
+                    <div class="text-lg font-medium">Annual Growth</div>
+                    <div class="mt-2 text-gray-400 text-sm">In construction, trades, and fleet operations</div>
+                </div>
+                
+                <div class="stats-card bg-white bg-opacity-5 p-6">
+                    <div class="text-teal text-4xl font-bold mb-2">2-5%</div>
+                    <div class="text-lg font-medium">Transaction Fee</div>
+                    <div class="mt-2 text-gray-400 text-sm">Affordable pricing for early payment access</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solution Section -->
+    <div id="how-it-works" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Flowly: Instant Early Payouts
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Get paid today for work you've already completed.
+                </p>
+            </div>
+            
+            <div class="mt-20 relative">
+                <div class="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 hidden lg:block"></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12">
+                    <div class="relative z-10 flex flex-col items-center text-center step-connector">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-teal text-white text-xl font-bold shadow-lg">
+                            1
+                        </div>
+                        <div class="mt-6">
+                            <h3 class="text-lg font-semibold navy">Complete the job</h3>
+                            <p class="mt-2 text-gray-500">Finish your work and get client sign-off as normal.</p>
+                        </div>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center text-center step-connector">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-teal text-white text-xl font-bold shadow-lg">
+                            2
+                        </div>
+                        <div class="mt-6">
+                            <h3 class="text-lg font-semibold navy">Upload invoice + proof</h3>
+                            <p class="mt-2 text-gray-500">Submit your invoice and proof of work completion.</p>
+                        </div>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center text-center step-connector">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-teal text-white text-xl font-bold shadow-lg">
+                            3
+                        </div>
+                        <div class="mt-6">
+                            <h3 class="text-lg font-semibold navy">AI verifies completion</h3>
+                            <p class="mt-2 text-gray-500">Our AI instantly validates your work documentation.</p>
+                        </div>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center text-center step-connector">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-teal text-white text-xl font-bold shadow-lg">
+                            4
+                        </div>
+                        <div class="mt-6">
+                            <h3 class="text-lg font-semibold navy">Accept your offer</h3>
+                            <p class="mt-2 text-gray-500">Review and accept your early payment offer.</p>
+                        </div>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center text-center">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-teal text-white text-xl font-bold shadow-lg">
+                            5
+                        </div>
+                        <div class="mt-6">
+                            <h3 class="text-lg font-semibold navy">Get paid within 24 hours</h3>
+                            <p class="mt-2 text-gray-500">Funds deposited directly to your account.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20 bg-light-grey rounded-2xl p-8 shadow-sm">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-8 md:mb-0 md:pr-8">
+                        <h3 class="text-2xl font-bold navy mb-4">See Flowly in Action</h3>
+                        <p class="text-gray-600 mb-6">
+                            Watch how a contractor uploads their invoice, gets it verified, and receives payment within 24 hours - all through our simple, digital-first platform.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                    <i class="fas fa-check text-teal"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <span class="text-sm font-medium navy">No credit checks</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                    <i class="fas fa-check text-teal"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <span class="text-sm font-medium navy">No paperwork</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                    <i class="fas fa-check text-teal"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <span class="text-sm font-medium navy">No waiting</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3">
+                        <div class="bg-navy rounded-xl p-6 text-center shadow-lg">
+                            <div class="w-16 h-16 mx-auto bg-teal rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-play text-white text-xl"></i>
+                            </div>
+                            <p class="text-white font-medium">Watch Demo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Flowly Section -->
+    <div id="why-flowly" class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Why Choose Flowly
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    We've reimagined factoring for the digital age.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold navy mb-6">Old Model vs Flowly</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-2 gap-4 pb-6 border-b border-gray-100">
+                                <div>
+                                    <div class="text-gray-500 text-sm mb-1">Traditional Factoring</div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-red-100 flex items-center justify-center">
+                                            <i class="fas fa-times text-red-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="text-sm font-medium navy">Manual onboarding</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-teal text-sm mb-1">Flowly</div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
+                                            <i class="fas fa-check text-green-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="text-sm font-medium navy">Instant signup</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 pb-6 border-b border-gray-100">
+                                <div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-red-100 flex items-center justify-center">
+                                            <i class="fas fa-times text-red-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="text-sm font-medium navy">Paperwork-heavy approvals</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
+                                            <i class="fas fa-check text-green-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="text-sm font-medium navy">AI-verified work in minutes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 pb-6 border-b border-gray-100">
+                                <div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-red-100 flex items-center justify-center">
+                                            <i class="fas fa-times text-red-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="text-sm font-medium navy">Fixed fee structures</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
+                                            <i class="fas fa-check text-green-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="text-sm font-medium navy">Dynamic, risk-adjusted fees</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-red-100 flex items-center justify-center">
+                                            <i class="fas fa-times text-red-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="text-sm font-medium navy">No forecasting tools</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
+                                            <i class="fas fa-check text-green-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="text-sm font-medium navy">Predictive cash flow forecasting</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold navy mb-6">Business Model</h3>
+                        
+                        <div class="space-y-8">
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-percentage text-teal"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg font-semibold navy">Transaction Fee</h4>
+                                    </div>
+                                </div>
+                                <div class="ml-14">
+                                    <p class="text-gray-600 mb-3">2%-5% of funded payout, based on invoice quality and payment terms.</p>
+                                    <div class="bg-light-grey rounded-lg p-4">
+                                        <div class="flex justify-between items-center">
+                                            <div class="text-sm text-gray-500">Example:</div>
+                                            <div class="text-sm font-medium navy">$10,000 invoice × 4% = $400 fee</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-laptop text-teal"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg font-semibold navy">SaaS Subscription</h4>
+                                    </div>
+                                </div>
+                                <div class="ml-14">
+                                    <p class="text-gray-600 mb-3">$99-$299/month based on business size, includes advanced features.</p>
+                                    <div class="bg-light-grey rounded-lg p-4">
+                                        <div class="flex justify-between items-center">
+                                            <div class="text-sm text-gray-500">Features include:</div>
+                                            <div class="text-sm font-medium navy">Cash flow forecasting, client management</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- For Factoring Partners Section -->
+    <div id="partners" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                        For Factoring Partners
+                    </h2>
+                    <p class="mt-4 text-lg text-gray-500">
+                        Flowly provides a steady stream of pre-verified, high-quality receivables from blue-collar businesses.
+                    </p>
+                    <div class="mt-8">
+                        <ul class="space-y-6">
+                            <li class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal bg-opacity-10">
+                                        <i class="fas fa-robot text-teal text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">AI-Verified Work Completion</h4>
+                                    <p class="mt-1 text-gray-500">Every receivable comes with validated proof of work, reducing fraud risk and ensuring quality.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal bg-opacity-10">
+                                        <i class="fas fa-chart-line text-teal text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Reduced Acquisition Costs</h4>
+                                    <p class="mt-1 text-gray-500">We handle customer acquisition and onboarding, delivering ready-to-fund opportunities to your pipeline.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal bg-opacity-10">
+                                        <i class="fas fa-laptop-code text-teal text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Digital-First Process</h4>
+                                    <p class="mt-1 text-gray-500">Streamlined documentation and PPSA registration through our modern platform reduces administrative overhead.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal bg-opacity-10">
+                                        <i class="fas fa-expand-alt text-teal text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium navy">Scalable Volume</h4>
+                                    <p class="mt-1 text-gray-500">Access to the underserved blue-collar market across Canada with growing transaction volume.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-12 lg:mt-0">
+                    <div class="bg-light-grey p-8 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-bold navy mb-6">Partnership Opportunities</h3>
+                        <p class="mb-8 text-gray-600">We're seeking established factoring partners to purchase verified receivables from our blue-collar business clients.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <div class="font-medium mb-2 navy">Industries</div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Construction</span>
+                                    <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Trades</span>
+                                    <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Fleet Operations</span>
+                                    <span class="bg-teal bg-opacity-10 text-teal px-3 py-1 rounded-full text-sm">Landscaping</span>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <div class="font-medium mb-2 navy">Average Invoice Size</div>
+                                <div class="text-gray-600 text-2xl font-bold">$5,000 - $50,000</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <div class="font-medium mb-2 navy">Verification Process</div>
+                                <div class="text-gray-600">
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-teal mr-2"></i>
+                                            AI-powered document verification
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-teal mr-2"></i>
+                                            Geo-tagged photos
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-teal mr-2"></i>
+                                            Client sign-off confirmation
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <a href="#contact" class="block text-center bg-navy hover:bg-opacity-90 text-white px-6 py-3 rounded-md font-medium transition duration-150 ease-in-out">
+                                Become a Funding Partner
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Frequently Asked Questions
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Everything you need to know about Flowly.
+                </p>
+            </div>
+            
+            <div class="space-y-4 max-w-3xl mx-auto">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-semibold navy">What is Flowly?</h3>
+                        <div class="faq-icon text-teal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">
+                            Flowly is a digital platform that connects blue-collar businesses with factoring partners who purchase their verified receivables, providing same-day payment for completed work. We use AI technology to verify work completion before presenting receivables for purchase.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-semibold navy">How quickly can I get paid?</h3>
+                        <div class="faq-icon text-teal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">
+                            Once your work is verified and your invoice is approved, you'll receive payment within 24 hours. The verification process typically takes just minutes, not days or weeks like traditional factoring.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-semibold navy">What types of businesses can use Flowly?</h3>
+                        <div class="faq-icon text-teal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">
+                            Flowly is designed for blue-collar businesses including construction contractors, trades (plumbing, electrical, HVAC), fleet operations, and landscaping companies that typically wait 30-90 days for payment on completed work.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-semibold navy">How does the verification process work?</h3>
+                        <div class="faq-icon text-teal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">
+                            Our AI-powered verification system analyzes multiple data points including invoice documentation, work orders with client signatures, geo-tagged photos of completed work, and timestamped completion documentation to confirm the work has been completed.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-semibold navy">What are the fees?</h3>
+                        <div class="faq-icon text-teal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">
+                            Flowly charges a transaction fee depending on the factoring partners negotiated rates, this can range anywhere from 2-5% depending on factors like invoice quality, payment terms, and client payment history. Flowly also requires a SaaS subscription with advanced features for $99-$299/month based on business size.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 6 -->
+                <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-semibold navy">How do I get started?</h3>
+                        <div class="faq-icon text-teal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600">
+                            Sign up on our platform, complete a simple onboarding process, and you can start uploading invoices immediately. There's no lengthy application process or paperwork - everything is digital and streamlined.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 7 -->
+                <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-semibold navy">How does Flowly guarantee payment to factoring partners?</h3>
+                        <div class="faq-icon text-teal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600 mb-3">
+                            While we don't directly guarantee payments, our multi-layered verification system significantly reduces risk for our factoring partners:
+                        </p>
+                        <ul class="text-gray-600 space-y-2 list-inside pl-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Our AI technology verifies work completion through multiple data points</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>We pre-screen businesses and their commercial clients</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>We handle all documentation and PPSA registration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>We only present invoices that meet our quality standards</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Each transaction includes appropriate recourse terms agreed upon with our factoring partners</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 8 -->
+                <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-semibold navy">How does the credit limit system work?</h3>
+                        <div class="faq-icon text-teal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600 mb-3">
+                            Our factoring partners set the ultimate credit limits, but Flowly's recommendation system influences these decisions:
+                        </p>
+                        <ul class="text-gray-600 space-y-2 list-inside pl-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>New businesses start with conservative limits based on our initial assessment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>As invoices are successfully paid to our factoring partners, we recommend higher limits</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Businesses with strong payment histories receive priority access to funding</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Our AI system tracks performance metrics to continually reassess risk profiles</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 9 -->
+                <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-semibold navy">What contractual requirements do businesses need with their clients?</h3>
+                        <div class="faq-icon text-teal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer hidden px-6 pb-6 pt-0">
+                        <p class="text-gray-600 mb-3">
+                            For a business to use Flowly effectively, their client contracts must include:
+                        </p>
+                        <ul class="text-gray-600 space-y-2 list-inside pl-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Clear payment terms (net 30/60/90)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>A clause permitting assignment of receivables to third parties</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Verification and acceptance procedures for completed work</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Authorization for factoring partners to collect directly if an invoice is funded</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-teal mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Late payment penalties and interest terms must be listed</span>
+                            </li>
+                        </ul>
+                        <p class="text-gray-600 mt-3">
+                            We provide guidance on these requirements during onboarding and can help businesses update their contracts if needed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-3 lg:gap-8 items-center">
+                <div>
+                    <h2 class="text-3xl font-extrabold navy">
+                        About Flowly
+                    </h2>
+                    <p class="mt-4 text-lg text-gray-500">
+                        Founded to solve the cash flow crisis facing blue-collar businesses across Canada.
+                    </p>
+                    <div class="mt-8 hidden lg:block">
+                        <div class="bg-light-grey rounded-xl p-6">
+                            <div class="flex items-center">
+                                <div class="h-16 w-16 rounded-full overflow-hidden">
+                                    <img src="../headshots/Dreamwave-Photo.png" alt="Brent Broten" class="w-full h-full object-cover">
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-semibold navy">Brent Broten</h3>
+                                    <p class="text-gray-500">Founder & CEO</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-gray-600">
+                                <p class="font-medium mb-2">18+ years in operations excellence</p>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-teal mt-1 mr-2"></i>
+                                        <span>Dedicated to helping businesses achieve sustainable growth</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-teal mt-1 mr-2"></i>
+                                        <span>Deep understanding of cash flow requirements for blue-collar businesses</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-teal mt-1 mr-2"></i>
+                                        <span>Firsthand knowledge that 30-60 day payment terms can prevent companies from taking on new work</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 lg:mt-0 lg:col-span-2">
+                    <div class="space-y-6 text-gray-500">
+                        <p class="text-lg">
+                            Flowly was created to address the critical cash flow gap facing contractors, trades, and fleet operators. With 30-90 day payment terms standard in these industries, hardworking business owners often struggle to make payroll, purchase materials, or take on new projects.
+                        </p>
+                        <p>
+                            Our founder, Brent Broten, spent 18+ years in automotive and logistics operations while supporting his family. As a husband and father, he understands the personal stress that comes when payments are delayed - from struggling to meet payroll to the anxiety of explaining to your family why this month will be tight. He's witnessed firsthand how delayed payments not only stifle business growth but create real hardship for the families that depend on these businesses.
+                        </p>
+                        <p>
+                            By combining AI verification technology with a streamlined factoring process, Flowly delivers the fastest path to payment for businesses that can't afford to wait.
+                        </p>
+                        <div class="pt-6 border-t border-gray-200">
+                            <h3 class="text-lg font-semibold navy mb-4">Why Now?</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-virus text-teal"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <span class="text-sm font-medium navy">Post-pandemic slowdown</span>
+                                        <p class="mt-1 text-sm text-gray-500">Payments slower than ever in the current economy</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-chart-pie text-teal"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <span class="text-sm font-medium navy">Inflation pressure</span>
+                                        <p class="mt-1 text-sm text-gray-500">Increasing pressure on working capital</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-mobile-alt text-teal"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <span class="text-sm font-medium navy">Fintech adoption</span>
+                                        <p class="mt-1 text-sm text-gray-500">Accelerating across small-medium businesses</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center">
+                                        <i class="fas fa-brain text-teal"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <span class="text-sm font-medium navy">AI capabilities</span>
+                                        <p class="mt-1 text-sm text-gray-500">Enable instant underwriting and verification</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="py-20 bg-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold navy sm:text-4xl">
+                    Let's Build the Future of Blue-Collar Finance
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Interested in partnering with Flowly? Get in touch.
+                </p>
+            </div>
+            <div class="mt-16 max-w-lg mx-auto">
+                <div class="bg-white shadow-sm rounded-xl overflow-hidden">
+                    <div class="bg-navy px-6 py-4 text-white">
+                        <h3 class="text-lg font-medium">Contact Us</h3>
+                    </div>
+                    <form class="p-6">
+                        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+                            <div class="sm:col-span-2">
+                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                                <div class="mt-1">
+                                    <input type="text" name="name" id="name" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
+                                <div class="mt-1">
+                                    <input type="text" name="company" id="company" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <div class="mt-1">
+                                    <input type="email" name="email" id="email" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                                <div class="mt-1">
+                                    <input type="text" name="phone" id="phone" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal">
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                                <div class="mt-1">
+                                    <textarea id="message" name="message" rows="4" class="py-3 px-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal"></textarea>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <button type="submit" class="w-full bg-teal hover:bg-opacity-90 text-white py-3 px-4 rounded-md shadow-sm text-sm font-medium transition duration-150 ease-in-out">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <span class="text-2xl font-bold text-white">flow<span class="teal">ly</span></span>
+                    <p class="text-gray-300 mt-2">Instant Cash Flow for Blue-Collar Businesses</p>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#about" class="text-gray-300 hover:text-white">About</a></li>
+                        <li><a href="flowly-careers.html" class="text-gray-300 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="flowly-privacy-policy.html" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Contact</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-envelope mr-2 text-teal"></i>
+                            hello@getflowly.ca
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-globe mr-2 text-teal"></i>
+                            www.getflowly.ca
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Flowly. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Button (only visible on small screens) -->
+    <div class="fixed bottom-6 right-6 md:hidden">
+        <button class="bg-teal text-white p-4 rounded-full shadow-lg">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript for smooth scrolling and FAQ toggle -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        function toggleFAQ(element) {
+            // Get the answer element (next sibling after the question)
+            const answer = element.nextElementSibling;
+            // Get the icon element
+            const icon = element.querySelector('.faq-icon i');
+            
+            // Toggle the answer visibility
+            if (answer.classList.contains('hidden')) {
+                // Show the answer with a smooth animation
+                answer.classList.remove('hidden');
+                answer.style.maxHeight = '0';
+                setTimeout(() => {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }, 10);
+                
+                // Change the icon from plus to minus
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                // Hide the answer with a smooth animation
+                answer.style.maxHeight = '0';
+                setTimeout(() => {
+                    answer.classList.add('hidden');
+                }, 300);
+                
+                // Change the icon from minus to plus
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+    </script>
+</body>
+</html>
