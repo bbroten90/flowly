@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Waitlist | Flowly - Get Early Access</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .navy { color: #0A0A23; }
+        .bg-navy { background-color: #0A0A23; }
+        .teal { color: #00D1B2; }
+        .bg-teal { background-color: #00D1B2; }
+        .aqua { color: #29ABE2; }
+        .bg-aqua { background-color: #29ABE2; }
+        .charcoal { color: #2D2D2D; }
+        .bg-light-grey { background-color: #F7F8FA; }
+        .success-green { color: #2ECC71; }
+        .bg-success-green { background-color: #2ECC71; }
+        .alert-orange { color: #FF8C42; }
+        .bg-alert-orange { background-color: #FF8C42; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0A0A23 0%, #1a1a4e 100%);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .form-input:focus {
+            border-color: #00D1B2;
+            box-shadow: 0 0 0 3px rgba(0, 209, 178, 0.2);
+        }
+        
+        /* Button gradient styling */
+        .btn-gradient {
+            background: linear-gradient(90deg, #0A0A23 0%, #00D1B2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Honeypot field for anti-spam */
+        .honeypot {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 0;
+            width: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-light-grey font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold navy">flow<span class="teal">ly</span></a>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="index.html#how-it-works" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            How It Works
+                        </a>
+                        <a href="index.html#why-flowly" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            Why Flowly
+                        </a>
+                        <a href="index.html#partners" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            For Partners
+                        </a>
+                        <a href="index.html#about" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900">
+                            About
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html#contact" class="hidden md:inline-flex btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-envelope mr-2"></i>Contact Us
+                    </a>
+                    <a href="/frontend/flowly-business-dashboard.tsx" class="btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-circle mr-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative gradient-bg">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute right-0 top-0 transform translate-x-1/4 -translate-y-1/4">
+                <div class="w-96 h-96 bg-teal opacity-10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="absolute left-0 bottom-0 transform -translate-x-1/4 translate-y-1/4">
+                <div class="w-96 h-96 bg-aqua opacity-10 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight">
+                    Join the Flowly Waitlist
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-300">
+                    Be among the first to get access to our revolutionary cash flow solution for blue-collar businesses
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Waitlist Form Section -->
+    <div class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-light-grey rounded-xl shadow-sm overflow-hidden">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-2xl font-bold navy">Join Our Waitlist</h2>
+                        <div class="text-gray-500 text-sm">
+                            Already have an account? 
+                            <a href="/frontend/flowly-business-dashboard.tsx" class="text-teal font-medium hover:underline">Log in</a>
+                        </div>
+                    </div>
+
+                    <form id="waitlist-form">
+                        <!-- Honeypot field for anti-spam -->
+                        <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off">
+                        
+                        <!-- Form Fields -->
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name <span class="text-red-500">*</span></label>
+                                <input type="text" id="name" name="name" required class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div>
+                                <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Company Name <span class="text-red-500">*</span></label>
+                                <input type="text" id="company" name="company" required class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address <span class="text-red-500">*</span></label>
+                                <input type="email" id="email" name="email" required class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div>
+                                <label for="annual-sales" class="block text-sm font-medium text-gray-700 mb-1">Company Annual Sales <span class="text-red-500">*</span></label>
+                                <select id="annual-sales" name="annual-sales" required class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none">
+                                    <option value="">Select Annual Sales Range</option>
+                                    <option value="less-than-500k">Less than $500,000</option>
+                                    <option value="500k-1m">$500,000 - $1 million</option>
+                                    <option value="1m-5m">$1 million - $5 million</option>
+                                    <option value="5m-10m">$5 million - $10 million</option>
+                                    <option value="more-than-10m">More than $10 million</option>
+                                </select>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input id="email-consent" name="email-consent" type="checkbox" required class="h-4 w-4 text-teal focus:ring-teal border-gray-300 rounded">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="email-consent" class="font-medium text-gray-700">I agree to receive email updates about Flowly's services and waitlist status <span class="text-red-500">*</span></label>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" class="w-full btn-gradient hover:shadow-lg text-white py-3 px-4 rounded-md shadow-sm text-lg font-medium transition duration-150 ease-in-out">
+                                    Join the Waitlist
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Benefits Section -->
+            <div class="mt-12 bg-white rounded-xl shadow-sm p-8">
+                <h3 class="text-xl font-bold navy mb-6">Why Join Our Waitlist?</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="h-16 w-16 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mb-4">
+                            <i class="fas fa-star text-teal text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold navy mb-2">Early Access</h4>
+                        <p class="text-gray-600">Be among the first to experience our revolutionary cash flow solution.</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <div class="h-16 w-16 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mb-4">
+                            <i class="fas fa-gift text-teal text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold navy mb-2">Exclusive Benefits</h4>
+                        <p class="text-gray-600">Waitlist members receive special offers and priority onboarding.</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <div class="h-16 w-16 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mb-4">
+                            <i class="fas fa-bullhorn text-teal text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold navy mb-2">Stay Informed</h4>
+                        <p class="text-gray-600">Get the latest updates on our launch and new features.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <span class="text-2xl font-bold text-white">flow<span class="teal">ly</span></span>
+                    <p class="text-gray-300 mt-2">Instant Cash Flow for Blue-Collar Businesses</p>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="index.html#about" class="text-gray-300 hover:text-white">About</a></li>
+                        <li><a href="flowly-careers.html" class="text-gray-300 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="investors.html" class="text-gray-300 hover:text-white">Investors</a></li>
+                        <li><a href="flowly-privacy-policy.html" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Contact</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-envelope mr-2 text-teal"></i>
+                            hello@getflowly.ca
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-globe mr-2 text-teal"></i>
+                            www.getflowly.ca
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Flowly. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Form Submission Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('waitlist-form');
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Check if honeypot field is filled (bot submission)
+                if (document.querySelector('.honeypot').value !== '') {
+                    return false;
+                }
+                
+                // In a real implementation, you would submit the form data to your backend
+                // For demo purposes, we'll just show a success message
+                alert('Thank you for joining our waitlist! We will notify you when Flowly is ready for your business.');
+                
+                // Reset the form
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>
