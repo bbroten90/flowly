@@ -92,6 +92,18 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+        
+        /* Button gradient styling */
+        .btn-gradient {
+            background: linear-gradient(90deg, #0A0A23 0%, #0A0A23 75%, #00D1B2 75%, #00D1B2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            background: linear-gradient(90deg, #0A0A23 0%, #00D1B2 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
 
         .tech-diagram {
             position: relative;
@@ -314,10 +326,13 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="index.html#contact" class="hidden md:inline-flex bg-teal hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
-                        Contact Us
+                    <a href="index.html#contact" class="hidden md:inline-flex btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-envelope mr-2"></i>Contact Us
                     </a>
-                    <a href="/frontend/flowly-business-dashboard.tsx" class="bg-navy hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                    <a href="flowly-registration.html" class="hidden md:inline-flex btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
+                        <i class="fas fa-user-plus mr-2"></i>Register
+                    </a>
+                    <a href="/frontend/flowly-business-dashboard.tsx" class="btn-gradient hover:shadow-lg text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">
                         <i class="fas fa-user-circle mr-2"></i>Login
                     </a>
                 </div>
@@ -1048,7 +1063,8 @@
                         <li><a href="index.html#about" class="text-gray-300 hover:text-white">About</a></li>
                         <li><a href="flowly-careers.html" class="text-gray-300 hover:text-white">Careers</a></li>
                         <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="investors.html" class="text-gray-300 hover:text-white">Investors</a></li>
+                        <li><a href="flowly-privacy-policy.html" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div>
