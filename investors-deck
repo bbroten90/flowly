@@ -1,0 +1,1311 @@
+import React, { useState } from 'react';
+
+const FlowlyPitchDeck = () => {
+  const [currentSlide, setCurrentSlide] = useState(1);
+  const totalSlides = 17;
+
+  const nextSlide = () => {
+    if (currentSlide < totalSlides) {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentSlide > 1) {
+      setCurrentSlide(currentSlide - 1);
+    }
+  };
+
+  // Styling constants
+  const colors = {
+    navy: '#0A0A23',
+    teal: '#00D1B2',
+    aqua: '#29ABE2',
+    lightGrey: '#F7F8FA',
+    white: '#FFFFFF',
+    grey: '#6B7280',
+    green: '#2ECC71',
+    red: '#E53E3E',
+    orange: '#FF8C42'
+  };
+
+  // Common components
+  const SlideContainer = ({ children, bgColor = colors.white }) => (
+    <div className="relative w-full aspect-[16/9] rounded-lg shadow-lg overflow-hidden" style={{ backgroundColor: bgColor }}>
+      {children}
+    </div>
+  );
+
+  const SlideHeader = ({ title, subtitle, center = false, light = false }) => (
+    <div className={`${center ? 'text-center' : ''} mb-4`}>
+      <h2 className={`text-2xl font-bold ${light ? 'text-white' : 'text-navy'}`}>{title}</h2>
+      {subtitle && <p className={`text-lg mt-2 ${light ? 'text-gray-300' : 'text-gray-600'}`}>{subtitle}</p>}
+    </div>
+  );
+
+  const GradientBackground = ({ children }) => (
+    <div className="absolute inset-0 overflow-hidden" style={{ 
+      background: `linear-gradient(135deg, ${colors.navy} 0%, #1a1a4e 100%)`,
+      zIndex: -1 
+    }}>
+      <div className="absolute right-0 top-0 transform translate-x-1/4 -translate-y-1/4">
+        <div className="w-96 h-96 bg-teal opacity-10 rounded-full blur-3xl"></div>
+      </div>
+      <div className="absolute left-0 bottom-0 transform -translate-x-1/4 translate-y-1/4">
+        <div className="w-96 h-96 bg-aqua opacity-10 rounded-full blur-3xl"></div>
+      </div>
+      {children}
+    </div>
+  );
+
+  const Card = ({ title, children, icon }) => (
+    <div className="bg-white p-4 rounded-lg shadow-sm">
+      {icon && (
+        <div className="flex items-center mb-2">
+          <div className="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-2">
+            <i className={`fas ${icon} text-teal`}></i>
+          </div>
+          <h3 className="text-lg font-medium text-navy">{title}</h3>
+        </div>
+      )}
+      {!icon && <h3 className="text-lg font-medium text-navy mb-2">{title}</h3>}
+      <div className="text-gray-600 text-sm">{children}</div>
+    </div>
+  );
+
+  const PieChart = ({ data }) => {
+    // Simple visual representation
+    return (
+      <div className="w-64 h-64 rounded-full relative mx-auto my-4" style={{ background: `conic-gradient(
+        ${colors.teal} 0% ${data[0].percentage}%, 
+        ${colors.navy} ${data[0].percentage}% ${data[0].percentage + data[1].percentage}%,
+        ${colors.aqua} ${data[0].percentage + data[1].percentage}% 100%
+      )` }}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-white w-32 h-32 rounded-full"></div>
+        </div>
+        <div className="absolute right-0 -bottom-24 space-y-1">
+          {data.map((item, i) => (
+            <div key={i} className="flex items-center text-xs">
+              <div className="w-3 h-3 mr-1" style={{ backgroundColor: item.color }}></div>
+              <span>{item.label}: {item.percentage}%</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const BarChart = ({ data, title }) => {
+    const maxValue = Math.max(...data.map(d => d.value));
+    
+    return (
+      <div className="mt-4">
+        {title && <h4 className="text-sm font-medium text-navy mb-2">{title}</h4>}
+        <div className="space-y-3">
+          {data.map((item, i) => (
+            <div key={i}>
+              <div className="flex justify-between text-xs mb-1">
+                <span>{item.label}</span>
+                <span className="font-medium">{item.value}{item.unit}</span>
+              </div>
+              <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                <div 
+                  className="h-full rounded-full" 
+                  style={{ 
+                    width: `${(item.value / maxValue) * 100}%`,
+                    backgroundColor: item.color || colors.teal 
+                  }}
+                ></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const CheckItem = ({ text, checked = true }) => (
+    <div className="flex items-start mb-2">
+      <div className="flex-shrink-0 mt-1">
+        <div className={`h-5 w-5 rounded-full ${checked ? 'bg-green-100' : 'bg-red-100'} flex items-center justify-center`}>
+          <i className={`fas ${checked ? 'fa-check text-green-500' : 'fa-times text-red-500'} text-xs`}></i>
+        </div>
+      </div>
+      <div className="ml-2 text-sm text-gray-600">{text}</div>
+    </div>
+  );
+
+  const ComparisonTable = ({ headers, rows }) => (
+    <div className="overflow-x-auto">
+      <table className="min-w-full text-xs">
+        <thead>
+          <tr>
+            {headers.map((header, i) => (
+              <th key={i} className="px-3 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {rows.map((row, i) => (
+            <tr key={i}>
+              {row.map((cell, j) => (
+                <td key={j} className="px-3 py-2 whitespace-nowrap text-xs">
+                  {typeof cell === 'boolean' ? (
+                    <i className={`fas ${cell ? 'fa-check-circle text-green-500' : 'fa-times-circle text-red-500'}`}></i>
+                  ) : (
+                    cell
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+
+  const TimelineItem = ({ phase, date, items, completed = false, current = false }) => {
+    const bgColor = completed ? 'bg-green-50' : current ? 'bg-blue-50' : 'bg-gray-50';
+    const borderColor = completed ? 'border-green-500' : current ? 'border-blue-500' : 'border-gray-300';
+    
+    return (
+      <div className={`${bgColor} p-3 rounded-lg border-l-4 ${borderColor} mb-3`}>
+        <div className="flex justify-between items-center mb-2">
+          <h4 className="font-medium text-navy text-sm">{phase}</h4>
+          <span className="text-xs text-gray-500">{date}</span>
+        </div>
+        <ul className="text-xs text-gray-600 space-y-1">
+          {items.map((item, i) => (
+            <li key={i} className="flex items-start">
+              <i className="fas fa-circle text-xs mt-1 mr-2 text-teal"></i>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
+  // Render function for each slide
+  const renderSlide = () => {
+    switch(currentSlide) {
+      case 1: // Cover Slide
+        return (
+          <SlideContainer bgColor="transparent">
+            <GradientBackground />
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+              <div className="mb-6">
+                <h1 className="text-4xl font-bold text-white mb-2">
+                  <span>flow</span><span className="text-teal">ly</span>
+                </h1>
+                <p className="text-2xl text-white font-light">Transforming Cash Flow for Blue-Collar Businesses</p>
+              </div>
+              <p className="text-xl text-teal font-medium mt-4">Upload Proof. Get Paid Today. Grow Tomorrow.</p>
+              <div className="mt-12 text-white text-sm">
+                <p>Brent Broten, Founder & CEO</p>
+                <p className="mt-1">hello@getflowly.ca | www.getflowly.ca</p>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+        
+      case 2: // The Problem Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="The Cash Flow Crisis in Blue-Collar Industries" 
+              />
+              
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="bg-light-grey p-4 rounded-lg">
+                    <div className="flex items-center mb-2">
+                      <div className="h-8 w-8 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                        <i className="fas fa-hourglass-half text-red-500"></i>
+                      </div>
+                      <h3 className="text-lg font-medium text-navy">30-90 Day Payment Terms</h3>
+                    </div>
+                    <p className="text-sm text-gray-600">Standard payment terms force businesses to finance their customers for months</p>
+                  </div>
+                  
+                  <div className="bg-light-grey p-4 rounded-lg">
+                    <div className="flex items-center mb-2">
+                      <div className="h-8 w-8 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                        <i className="fas fa-chart-line text-red-500"></i>
+                      </div>
+                      <h3 className="text-lg font-medium text-navy">65% Report Cash Flow Issues</h3>
+                    </div>
+                    <p className="text-sm text-gray-600">Majority of blue-collar businesses struggle with cash flow due to slow payments</p>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col justify-between">
+                  <div className="bg-light-grey p-4 rounded-lg mb-4">
+                    <h3 className="text-lg font-medium text-navy mb-2">Impact on Businesses</h3>
+                    <ul className="text-sm text-gray-600 space-y-2">
+                      <li className="flex items-start">
+                        <i className="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                        <span>Inability to take on new projects</span>
+                      </li>
+                      <li className="flex items-start">
+                        <i className="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                        <span>Payroll difficulties</span>
+                      </li>
+                      <li className="flex items-start">
+                        <i className="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                        <span>Material purchase limitations</span>
+                      </li>
+                      <li className="flex items-start">
+                        <i className="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                        <span>Growth constraints</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-navy p-4 rounded-lg">
+                    <p className="text-white italic text-sm">
+                      "The biggest challenge in our industry isn't finding work—it's getting paid for it on time."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+        
+      case 3: // Market Size Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="A Massive, Underserved Market" 
+              />
+              
+              <div className="grid grid-cols-2 gap-8">
+                <div className="flex flex-col justify-center">
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-3">
+                        <i className="fas fa-dollar-sign text-teal"></i>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-medium text-navy">$1.5 Trillion</h3>
+                        <p className="text-sm text-gray-600">U.S. & Canadian B2B invoice market</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-3">
+                        <i className="fas fa-chart-line text-teal"></i>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-medium text-navy">8% Annual Growth</h3>
+                        <p className="text-sm text-gray-600">In construction and trades sectors</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-3">
+                        <i className="fas fa-exclamation-triangle text-teal"></i>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-medium text-navy">65% Late Payment Rate</h3>
+                        <p className="text-sm text-gray-600">Across blue-collar industries</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 h-8 w-8 rounded-full bg-teal bg-opacity-10 flex items-center justify-center mr-3">
+                        <i className="fas fa-building text-teal"></i>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-medium text-navy">900,000+ Businesses</h3>
+                        <p className="text-sm text-gray-600">Small-medium blue-collar operations in Canada & U.S.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-center">
+                  <PieChart 
+                    data={[
+                      { label: 'Blue-Collar', percentage: 38, color: colors.teal },
+                      { label: 'White-Collar', percentage: 42, color: colors.navy },
+                      { label: 'Other Services', percentage: 20, color: colors.aqua }
+                    ]} 
+                  />
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+        
+      case 4: // The Solution Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="Flowly: AI-Powered Verification Platform" 
+              />
+              
+              <div className="grid grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <div className="bg-light-grey p-4 rounded-lg">
+                    <div className="flex items-center mb-2">
+                      <div className="h-8 w-8 rounded-full bg-teal bg-opacity-20 flex items-center justify-center mr-3">
+                        <i className="fas fa-robot text-teal"></i>
+                      </div>
+                      <h3 className="text-lg font-medium text-navy">Multi-Point AI Verification</h3>
+                    </div>
+                    <p className="text-sm text-gray-600">Validates work completion in under 60 seconds vs. traditional 2-5 day process</p>
+                  </div>
+                  
+                  <div className="bg-light-grey p-4 rounded-lg">
+                    <div className="flex items-center mb-2">
+                      <div className="h-8 w-8 rounded-full bg-teal bg-opacity-20 flex items-center justify-center mr-3">
+                        <i className="fas fa-laptop text-teal"></i>
+                      </div>
+                      <h3 className="text-lg font-medium text-navy">Digital-First Platform</h3>
+                    </div>
+                    <p className="text-sm text-gray-600">Connecting blue-collar businesses with factoring partners</p>
+                  </div>
+                  
+                  <div className="bg-light-grey p-4 rounded-lg">
+                    <div className="flex items-center mb-2">
+                      <div className="h-8 w-8 rounded-full bg-teal bg-opacity-20 flex items-center justify-center mr-3">
+                        <i className="fas fa-layer-group text-teal"></i>
+                      </div>
+                      <h3 className="text-lg font-medium text-navy">Tiered Subscription Model</h3>
+                    </div>
+                    <p className="text-sm text-gray-600">Increasing benefits and lower fees as businesses grow</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-center">
+                  <div className="w-full">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex-1 text-center">
+                        <div className="h-16 w-16 rounded-full bg-light-grey flex items-center justify-center mx-auto mb-2">
+                          <i className="fas fa-upload text-navy text-xl"></i>
+                        </div>
+                        <p className="text-xs text-gray-600">Business uploads documentation</p>
+                      </div>
+                      <div className="w-8 flex-shrink-0 text-center text-gray-400">
+                        <i className="fas fa-arrow-right"></i>
+                      </div>
+                      <div className="flex-1 text-center">
+                        <div className="h-16 w-16 rounded-full bg-light-grey flex items-center justify-center mx-auto mb-2">
+                          <i className="fas fa-check-circle text-teal text-xl"></i>
+                        </div>
+                        <p className="text-xs text-gray-600">Flowly AI verifies</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1 text-center">
+                        <div className="h-16 w-16 rounded-full bg-light-grey flex items-center justify-center mx-auto mb-2">
+                          <i className="fas fa-dollar-sign text-green-500 text-xl"></i>
+                        </div>
+                        <p className="text-xs text-gray-600">Business receives payment</p>
+                      </div>
+                      <div className="w-8 flex-shrink-0 text-center text-gray-400">
+                        <i className="fas fa-arrow-left"></i>
+                      </div>
+                      <div className="flex-1 text-center">
+                        <div className="h-16 w-16 rounded-full bg-light-grey flex items-center justify-center mx-auto mb-2">
+                          <i className="fas fa-university text-navy text-xl"></i>
+                        </div>
+                        <p className="text-xs text-gray-600">Factoring partner funds</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+        
+      case 5: // How It Works Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="Revolutionary Verification System" 
+              />
+              
+              <div className="space-y-3">
+                <div className="bg-light-grey p-4 rounded-lg">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="h-8 w-8 rounded-full bg-navy flex items-center justify-center text-white font-bold">1</div>
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-base font-medium text-navy">Contractor completes job and receives client sign-off</h3>
+                      <p className="text-sm text-gray-600 mt-1">Work is completed according to existing contract terms</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-light-grey p-4 rounded-lg">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="h-8 w-8 rounded-full bg-navy flex items-center justify-center text-white font-bold">2</div>
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-base font-medium text-navy">Uploads documentation through Flowly platform</h3>
+                      <p className="text-sm text-gray-600 mt-1">Invoice, proof of work, and client sign-off</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-light-grey p-4 rounded-lg">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="h-8 w-8 rounded-full bg-navy flex items-center justify-center text-white font-bold">3</div>
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-base font-medium text-navy">AI verification system validates work completion in 60 seconds</h3>
+                      <div className="grid grid-cols-2 gap-2 mt-1">
+                        <div className="text-xs text-gray-600">
+                          <i className="fas fa-check-circle text-teal mr-1"></i>
+                          Document analysis (99.7% accuracy)
+                        </div>
+                        <div className="text-xs text-gray-600">
+                          <i className="fas fa-check-circle text-teal mr-1"></i>
+                          Geo-verification
+                        </div>
+                        <div className="text-xs text-gray-600">
+                          <i className="fas fa-check-circle text-teal mr-1"></i>
+                          Timestamp validation
+                        </div>
+                        <div className="text-xs text-gray-600">
+                          <i className="fas fa-check-circle text-teal mr-1"></i>
+                          Cross-document consistency
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-light-grey p-4 rounded-lg">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="h-8 w-8 rounded-full bg-navy flex items-center justify-center text-white font-bold">4</div>
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-base font-medium text-navy">Matched with factoring partner based on risk profile</h3>
+                      <p className="text-sm text-gray-600 mt-1">Optimized matching for best terms and quick funding</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-light-grey p-4 rounded-lg">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="h-8 w-8 rounded-full bg-navy flex items-center justify-center text-white font-bold">5</div>
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-base font-medium text-navy">Funds deposited within 24 hours directly to contractor's account</h3>
+                      <p className="text-sm text-gray-600 mt-1">vs. 30-90 days standard payment terms</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+        
+      case 6: // Platform Overview Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="Digital-First Platform for Blue-Collar Businesses" 
+              />
+              
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-lg font-medium text-navy mb-4">Mobile App</h3>
+                  <div className="bg-light-grey rounded-lg p-4 h-64 flex items-center justify-center relative">
+                    {/* Mockup of mobile app */}
+                    <div className="w-40 h-80 bg-white rounded-3xl shadow-lg relative overflow-hidden border-8 border-navy">
+                      <div className="absolute top-0 left-0 right-0 bg-navy h-8 flex items-center justify-between px-4">
+                        <div className="text-white text-xs">9:41</div>
+                        <div className="flex space-x-1">
+                          <i className="fas fa-signal text-white text-xs"></i>
+                          <i className="fas fa-wifi text-white text-xs"></i>
+                          <i className="fas fa-battery-full text-white text-xs"></i>
+                        </div>
+                      </div>
+                      <div className="pt-8 px-2">
+                        <div className="bg-teal bg-opacity-10 rounded-lg p-2 mb-2">
+                          <div className="text-xxs text-center text-teal font-medium">flowly</div>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="bg-light-grey rounded p-1 h-6"></div>
+                          <div className="bg-light-grey rounded p-1 h-10"></div>
+                          <div className="bg-light-grey rounded p-1 h-20"></div>
+                          <div className="bg-light-grey rounded p-1 h-10"></div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="bg-white rounded p-2 shadow-sm">
+                          <i className="fas fa-camera text-teal mr-1"></i>
+                          <span>On-site documentation</span>
+                        </div>
+                        <div className="bg-white rounded p-2 shadow-sm">
+                          <i className="fas fa-map-marker-alt text-teal mr-1"></i>
+                          <span>GPS-tagged evidence</span>
+                        </div>
+                        <div className="bg-white rounded p-2 shadow-sm">
+                          <i className="fas fa-signature text-teal mr-1"></i>
+                          <span>Client e-signature</span>
+                        </div>
+                        <div className="bg-white rounded p-2 shadow-sm">
+                          <i className="fas fa-clock text-teal mr-1"></i>
+                          <span>Real-time status</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-medium text-navy mb-4">Business Dashboard</h3>
+                  <div className="bg-light-grey rounded-lg p-4 h-64 flex items-center justify-center relative">
+                    {/* Mockup of dashboard */}
+                    <div className="w-full h-56 bg-white rounded-lg shadow-lg overflow-hidden">
+                      <div className="bg-navy h-8 flex items-center px-4">
+                        <div className="text-white text-xs font-medium">flowly Dashboard</div>
+                      </div>
+                      <div className="p-3 grid grid-cols-3 gap-2">
+                        <div className="col-span-2">
+                          <div className="bg-light-grey rounded p-2 h-20 mb-2"></div>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="bg-light-grey rounded p-2 h-20"></div>
+                            <div className="bg-light-grey rounded p-2 h-20"></div>
+                          </div>
+                        </div>
+                        <div className="col-span-1 space-y-2">
+                          <div className="bg-teal bg-opacity-10 rounded p-2 h-12 flex items-center">
+                            <div className="w-2 h-8 bg-teal rounded-l mr-2"></div>
+                            <div className="text-xxs text-navy">Cash Flow</div>
+                          </div>
+                          <div className="bg-light-grey rounded p-2 h-32"></div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="bg-white rounded p-2 shadow-sm">
+                          <i className="fas fa-chart-line text-teal mr-1"></i>
+                          <span>Cash flow forecasting</span>
+                        </div>
+                        <div className="bg-white rounded p-2 shadow-sm">
+                          <i className="fas fa-history text-teal mr-1"></i>
+                          <span>Transaction history</span>
+                        </div>
+                        <div className="bg-white rounded p-2 shadow-sm">
+                          <i className="fas fa-file-invoice text-teal mr-1"></i>
+                          <span>Invoice management</span>
+                        </div>
+                        <div className="bg-white rounded p-2 shadow-sm">
+                          <i className="fas fa-comments text-teal mr-1"></i>
+                          <span>Partner communication</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+        
+      case 7: // Business Model Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="Multi-Revenue Monetization Strategy" 
+                subtitle="Dual Revenue Streams"
+              />
+              
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-lg font-medium text-navy mb-4">1. SaaS Subscription Tiers (Pricing TBD)</h3>
+                  
+                  <div className="bg-light-grey p-3 rounded-lg mb-4">
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="bg-white p-3 rounded-lg text-center shadow-sm">
+                        <h4 className="font-medium text-navy">Basic</h4>
+                        <div className="text-xl font-bold text-teal mt-1">$49.95</div>
+                        <p className="text-xs text-gray-500 mt-1">per month</p>
+                      </div>
+                      
+                      <div className="bg-white p-3 rounded-lg text-center shadow-sm">
+                        <h4 className="font-medium text-navy">Pro</h4>
+                        <div className="text-xl font-bold text-teal mt-1">$99</div>
+                        <p className="text-xs text-gray-500 mt-1">per month</p>
+                      </div>
+                      
+                      <div className="bg-white p-3 rounded-lg text-center shadow-sm">
+                        <h4 className="font-medium text-navy">Enterprise</h4>
+                        <div className="text-xl font-bold text-teal mt-1">$139</div>
+                        <p className="text-xs text-gray-500 mt-1">per month</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-lg font-medium text-navy mb-4">2. Transaction Fees</h3>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-start">
+                      <i className="fas fa-check-circle text-teal mt-1 mr-2"></i>
+                      <div>
+                        <p className="text-sm text-gray-700">2-5% fee on each factored invoice</p>
+                        <p className="text-xs text-gray-500">Based on subscription tier and risk profile</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <i className="fas fa-check-circle text-teal mt-1 mr-2"></i>
+                      <div>
+                        <p className="text-sm text-gray-700">Partners handle funding, we handle verification</p>
+                        <p className="text-xs text-gray-500">Lower capital requirements, higher margins</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-medium text-navy mb-4">Revenue Breakdown (at 1,000 customers)</h3>
+                  
+                  <div className="bg-light-grey rounded-lg p-4">
+                    <div className="bg-white rounded-lg p-3 shadow-sm mb-4">
+                      <h4 className="text-base font-medium text-navy mb-2">Monthly Recurring Revenue</h4>
+                      <div className="flex items-end justify-between">
+                        <div>
+                          <p className="text-xs text-gray-500">Subscription</p>
+                          <p className="text-sm font-medium">$49,950 ($49.95 base subscription)</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-xs text-gray-500">Transaction Fees</p>
+                          <p className="text-sm font-medium">$300,000 (at 4% factor fee)</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-gray-500">Total MRR</p>
+                          <p className="text-lg font-bold text-teal">$349,950</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="text-gray-600">Annual Run Rate</span>
+                          <span className="font-medium text-navy">TBD</span>
+                        </div>
+                        <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                          <div className="h-full bg-teal rounded-full" style={{ width: '83%' }}></div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="text-gray-600">Revenue per Customer</span>
+                          <span className="font-medium text-navy">$829/month</span>
+                        </div>
+                        <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                          <div className="h-full bg-teal rounded-full" style={{ width: '76%' }}></div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="text-gray-600">Gross Margin</span>
+                          <span className="font-medium text-navy">78%</span>
+                        </div>
+                        <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                          <div className="h-full bg-teal rounded-full" style={{ width: '78%' }}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+        
+        case 11: // Go-to-Market Strategy Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="Our Path to 1,000 Businesses" 
+                subtitle="Go-to-Market Strategy"
+              />
+              
+              <div className="space-y-4">
+                <TimelineItem 
+                  phase="Phase 1: Launch" 
+                  date="Months 1-6" 
+                  items={[
+                    "Focus on AB, Sask, MB and BC.",
+                    "Direct outreach to construction and trades",
+                    "Partnership with 2-3 factoring companies",
+                    "Target: 250 businesses"
+                  ]}
+                  current={true}
+                />
+                
+                <TimelineItem 
+                  phase="Phase 2: Expansion" 
+                  date="Months 7-12" 
+                  items={[
+                    "Expand to Ontario",
+                    "Referral program launch",
+                    "Add 2-3 additional factoring partners",
+                    "Target: 600 businesses total"
+                  ]}
+                />
+                
+                <TimelineItem 
+                  phase="Phase 3: Scale" 
+                  date="Months 13-18" 
+                  items={[
+                    "Pan-Canadian coverage",
+                    "Enhanced marketing campaigns",
+                    "Expand factoring partner network",
+                    "Target: 1,000 businesses total"
+                  ]}
+                />
+              </div>
+              
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="bg-light-grey p-4 rounded-lg">
+                  <h3 className="text-base font-medium text-navy mb-3">Customer Acquisition Channels</h3>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-600">Industry Partnerships</span>
+                      <span className="text-teal font-medium">35%</span>
+                    </div>
+                    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-teal rounded-full" style={{ width: '35%' }}></div>
+                    </div>
+                    
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-600">Direct Sales</span>
+                      <span className="text-teal font-medium">25%</span>
+                    </div>
+                    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-teal rounded-full" style={{ width: '25%' }}></div>
+                    </div>
+                    
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-600">Referral Program</span>
+                      <span className="text-teal font-medium">20%</span>
+                    </div>
+                    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-teal rounded-full" style={{ width: '20%' }}></div>
+                    </div>
+                    
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-600">Content Marketing</span>
+                      <span className="text-teal font-medium">15%</span>
+                    </div>
+                    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-teal rounded-full" style={{ width: '15%' }}></div>
+                    </div>
+                    
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-600">Digital Advertising</span>
+                      <span className="text-teal font-medium">5%</span>
+                    </div>
+                    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-teal rounded-full" style={{ width: '5%' }}></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-light-grey p-4 rounded-lg">
+                  <h3 className="text-base font-medium text-navy mb-3">Customer Growth Projection</h3>
+                  
+                  <div className="h-48 relative bg-white rounded-lg p-2">
+                    {/* Simple line chart representation */}
+                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gray-300"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
+                    
+                    {/* Data points */}
+                    <div className="absolute left-0 bottom-0 right-0 h-full">
+                      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
+                        <path d="M0,100 L20,75 L40,60 L60,40 L80,20 L100,0" fill="none" stroke={colors.teal} strokeWidth="2" />
+                      </svg>
+                      
+                      <div className="absolute bottom-0 left-0" style={{ left: '0%' }}>
+                        <div className="w-2 h-2 bg-teal rounded-full transform -translate-x-1/2"></div>
+                        <div className="text-xs text-gray-500 transform -translate-x-1/2 mt-1">0</div>
+                      </div>
+                      
+                      <div className="absolute bottom-0" style={{ left: '20%', bottom: '25%' }}>
+                        <div className="w-2 h-2 bg-teal rounded-full transform -translate-x-1/2"></div>
+                        <div className="text-xs text-gray-500 transform -translate-x-1/2 mt-1">250</div>
+                      </div>
+                      
+                      <div className="absolute bottom-0" style={{ left: '60%', bottom: '60%' }}>
+                        <div className="w-2 h-2 bg-teal rounded-full transform -translate-x-1/2"></div>
+                        <div className="text-xs text-gray-500 transform -translate-x-1/2 mt-1">600</div>
+                      </div>
+                      
+                      <div className="absolute bottom-0" style={{ left: '100%', bottom: '100%' }}>
+                        <div className="w-2 h-2 bg-teal rounded-full transform -translate-x-1/2"></div>
+                        <div className="text-xs text-gray-500 transform -translate-x-1/2 mt-1">1,000</div>
+                      </div>
+                    </div>
+                    
+                    <div className="absolute bottom-0 left-0 text-xs text-gray-500 transform translate-y-full pl-1">
+                      Month 1
+                    </div>
+                    <div className="absolute bottom-0 right-0 text-xs text-gray-500 transform translate-y-full pr-1">
+                      Month 18
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+        
+      case 12: // Traction & Validation Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="Early Results Validate Our Model" 
+                subtitle="Traction & Validation"
+              />
+              
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-lg font-medium text-navy mb-4">Current Status</h3>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">Platform Development</span>
+                        <span className="font-medium text-navy">80% Complete</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-teal rounded-full" style={{ width: '80%' }}></div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">AI Verification System</span>
+                        <span className="font-medium text-navy">Operational</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-green-500 rounded-full" style={{ width: '100%' }}></div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">Factoring Partner LOIs</span>
+                        <span className="font-medium text-navy">2 Signed</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-teal rounded-full" style={{ width: '40%' }}></div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-light-grey p-3 rounded-lg flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-navy">Initial Pilot Program</p>
+                        <p className="text-xs text-gray-600">25 businesses currently participating</p>
+                      </div>
+                      <div className="bg-teal text-white text-xs px-2 py-1 rounded">
+                        Active
+                      </div>
+                    </div>
+                    
+                    <div className="bg-navy p-3 rounded-lg">
+                      <div className="flex items-center">
+                        <div className="flex-shrink-0">
+                          <div className="h-10 w-10 rounded-full bg-teal bg-opacity-20 flex items-center justify-center text-teal">
+                            <i className="fas fa-file-invoice-dollar"></i>
+                          </div>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-xs text-gray-300">Total Invoice Volume Processed</p>
+                          <p className="text-xl font-bold text-white">$1.5 Million</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-medium text-navy mb-4">Customer Feedback</h3>
+                  
+                  <div className="bg-light-grey p-4 rounded-lg mb-4">
+                    <div className="flex mb-2">
+                      <div className="flex-shrink-0">
+                        <div className="h-8 w-8 rounded-full bg-navy flex items-center justify-center text-white">
+                          <i className="fas fa-user-circle"></i>
+                        </div>
+                      </div>
+                      <div className="ml-3">
+                        <p className="text-sm font-medium text-navy">John D., Plumbing Contractor</p>
+                        <div className="flex text-yellow-400 text-xs">
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-600 italic">
+                      "The verification was so fast - I uploaded my invoice and got funding approved in under 2 minutes. Game changer for my business."
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">Average Verification Time</span>
+                        <span className="font-medium text-teal">52 seconds</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-teal rounded-full" style={{ width: '87%' }}></div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">Would Recommend to Others</span>
+                        <span className="font-medium text-teal">98%</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-teal rounded-full" style={{ width: '98%' }}></div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">Average Satisfaction Rating</span>
+                        <span className="font-medium text-teal">4.8/5</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-teal rounded-full" style={{ width: '96%' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 bg-teal bg-opacity-10 p-3 rounded-lg">
+                    <h4 className="text-sm font-medium text-navy mb-2">Key Pilot Learnings</h4>
+                    <ul className="space-y-1">
+                      <li className="flex items-start">
+                        <i className="fas fa-lightbulb text-teal mt-1 mr-2 flex-shrink-0 text-xs"></i>
+                        <p className="text-xs text-gray-600">Mobile upload capability is essential for field work</p>
+                      </li>
+                      <li className="flex items-start">
+                        <i className="fas fa-lightbulb text-teal mt-1 mr-2 flex-shrink-0 text-xs"></i>
+                        <p className="text-xs text-gray-600">GPS verification significantly reduces fraud attempts</p>
+                      </li>
+                      <li className="flex items-start">
+                        <i className="fas fa-lightbulb text-teal mt-1 mr-2 flex-shrink-0 text-xs"></i>
+                        <p className="text-xs text-gray-600">Lead generation feature has high demand among users</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+      
+      case 13: // Financial Projections Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="The Financial Opportunity" 
+                subtitle="18-Month Projections"
+              />
+              
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-lg font-medium text-navy mb-4">Financial Projections</h3>
+                  
+                  <div className="h-48 bg-light-grey rounded-lg p-4 relative mb-4">
+                    {/* Simple chart representation */}
+                    <div className="absolute bottom-4 left-4 right-4 top-4">
+                      <div className="absolute bottom-0 left-0 right-0 h-px bg-gray-300"></div>
+                      <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
+                      
+                      {/* Revenue bars */}
+                      <div className="absolute left-0 bottom-0" style={{ left: '20%', height: '25%', width: '6%' }}>
+                        <div className="absolute bottom-0 w-full bg-teal rounded-t"></div>
+                      </div>
+                      
+                      <div className="absolute left-0 bottom-0" style={{ left: '45%', height: '60%', width: '6%' }}>
+                        <div className="absolute bottom-0 w-full bg-teal rounded-t"></div>
+                      </div>
+                      
+                      <div className="absolute left-0 bottom-0" style={{ left: '70%', height: '100%', width: '6%' }}>
+                        <div className="absolute bottom-0 w-full bg-teal rounded-t"></div>
+                      </div>
+                      
+                      {/* Labels */}
+                      <div className="absolute text-xs text-gray-500" style={{ left: '20%', bottom: '-20px' }}>
+                        Month 6
+                      </div>
+                      <div className="absolute text-xs text-gray-500" style={{ left: '45%', bottom: '-20px' }}>
+                        Month 12
+                      </div>
+                      <div className="absolute text-xs text-gray-500" style={{ left: '70%', bottom: '-20px' }}>
+                        Month 18
+                      </div>
+                      
+                      {/* Revenue amounts */}
+                      <div className="absolute text-xs font-medium text-teal" style={{ left: '20%', bottom: '25%', transform: 'translateX(-50%) translateY(-120%)' }}>
+                        $137K
+                      </div>
+                      <div className="absolute text-xs font-medium text-teal" style={{ left: '45%', bottom: '60%', transform: 'translateX(-50%) translateY(-120%)' }}>
+                        $329K
+                      </div>
+                      <div className="absolute text-xs font-medium text-teal" style={{ left: '70%', bottom: '100%', transform: 'translateX(-50%) translateY(-120%)' }}>
+                        $549K
+                      </div>
+                    </div>
+                    
+                    <div className="absolute top-3 left-3 text-xs text-gray-500">
+                      Monthly Revenue
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">Monthly Recurring Revenue (M18)</span>
+                        <span className="font-medium text-teal">$549,000</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-teal rounded-full" style={{ width: '100%' }}></div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">Annual Run Rate (M18)</span>
+                        <span className="font-medium text-teal">$6.59 million</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-teal rounded-full" style={{ width: '100%' }}></div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">Gross Margin</span>
+                        <span className="font-medium text-teal">78%</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-teal rounded-full" style={{ width: '78%' }}></div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-600">EBITDA Margin (M18)</span>
+                        <span className="font-medium text-teal">35%</span>
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-teal rounded-full" style={{ width: '35%' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-medium text-navy mb-4">Key Metrics</h3>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div className="bg-light-grey p-3 rounded-lg">
+                      <p className="text-xs text-gray-500">Customer Acquisition Cost</p>
+                      <p className="text-xl font-bold text-navy">$225</p>
+                      <p className="text-xs text-gray-500 mt-1">Per business</p>
+                    </div>
+                    
+                    <div className="bg-light-grey p-3 rounded-lg">
+                      <p className="text-xs text-gray-500">Customer Lifetime Value</p>
+                      <p className="text-xl font-bold text-teal">$13,500+</p>
+                      <p className="text-xs text-gray-500 mt-1">Average per business</p>
+                    </div>
+                    
+                    <div className="bg-light-grey p-3 rounded-lg">
+                      <p className="text-xs text-gray-500">LTV:CAC Ratio</p>
+                      <p className="text-xl font-bold text-green-500">60:1</p>
+                      <p className="text-xs text-gray-500 mt-1">Industry avg: 3:1</p>
+                    </div>
+                    
+                    <div className="bg-light-grey p-3 rounded-lg">
+                      <p className="text-xs text-gray-500">Payback Period</p>
+                      <p className="text-xl font-bold text-green-500">&lt;1 month</p>
+                      <p className="text-xs text-gray-500 mt-1">For customer acquisition</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-light-grey rounded-lg p-4">
+                    <h4 className="text-sm font-medium text-navy mb-3">Revenue Breakdown (Month 18)</h4>
+                    <div className="relative h-20 bg-white rounded-lg mb-3">
+                      {/* Stacked bar chart */}
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="h-8 bg-teal rounded-l" style={{ width: '17%' }}></div>
+                        <div className="h-8 bg-navy" style={{ width: '83%' }}></div>
+                      </div>
+                      
+                      <div className="absolute text-xs text-white font-medium" style={{ left: '8.5%', top: '50%', transform: 'translateY(-50%)' }}>
+                        17%
+                      </div>
+                      <div className="absolute text-xs text-white font-medium" style={{ left: '58.5%', top: '50%', transform: 'translateY(-50%)' }}>
+                        83%
+                      </div>
+                      
+                      <div className="absolute text-xs text-gray-600" style={{ left: '8.5%', bottom: '-18px', transform: 'translateX(-50%)' }}>
+                        SaaS ($139K)
+                      </div>
+                      <div className="absolute text-xs text-gray-600" style={{ left: '58.5%', bottom: '-18px', transform: 'translateX(-50%)' }}>
+                        Transaction Fees ($410K)
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div className="text-xs text-gray-500">Total Monthly Revenue</div>
+                      <div className="text-sm font-medium text-navy">$549,000</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );
+      
+      case 14: // Team Slide
+        return (
+          <SlideContainer>
+            <div className="p-6">
+              <SlideHeader 
+                title="The Team Behind Flowly" 
+              />
+              
+              <div className="grid grid-cols-3 gap-8">
+                <div className="col-span-1">
+                  <div className="bg-light-grey rounded-xl p-4 flex flex-col items-center text-center">
+                    <div className="h-24 w-24 rounded-full bg-gray-300 mb-4 overflow-hidden">
+                      {/* Placeholder for founder image */}
+                      <div className="w-full h-full bg-navy flex items-center justify-center text-white">
+                        <i className="fas fa-user text-3xl"></i>
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-bold navy">Brent Broten</h3>
+                    <p className="text-teal font-medium text-sm mb-2">Founder & CEO</p>
+                    <p className="text-xs text-gray-600 mb-3">
+                      18+ years in automotive and logistics operations with expertise in supply chain optimization and financial operations.
+                    </p>
+                    <div className="flex space-x-2">
+                      <div className="bg-navy bg-opacity-10 text-navy text-xs py-1 px-2 rounded-full">Operations</div>
+                      <div className="bg-navy bg-opacity-10 text-navy text-xs py-1 px-2 rounded-full">Finance</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="col-span-2 grid grid-cols-2 gap-4">
+                  <div className="bg-light-grey rounded-lg p-4">
+                    <h3 className="text-lg font-medium text-navy mb-3">Seeking to Add</h3>
+                    
+                    <div className="space-y-3">
+                      <div className="bg-white rounded-lg p-3 shadow-sm">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center mr-2">
+                            <i className="fas fa-laptop-code text-teal text-xs"></i>
+                          </div>
+                          <h4 className="text-sm font-medium text-navy">CTO with AI/ML Expertise</h4>
+                        </div>
+                        <p className="text-xs text-gray-600">To lead development of our AI verification system and technical infrastructure</p>
+                      </div>
+                      
+                      <div className="bg-white rounded-lg p-3 shadow-sm">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center mr-2">
+                            <i className="fas fa-handshake text-teal text-xs"></i>
+                          </div>
+                          <h4 className="text-sm font-medium text-navy">Business Development Lead</h4>
+                        </div>
+                        <p className="text-xs text-gray-600">With factoring industry experience to manage partner relationships</p>
+                      </div>
+                      
+                      <div className="bg-white rounded-lg p-3 shadow-sm">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 rounded-full bg-teal bg-opacity-20 flex items-center justify-center mr-2">
+                            <i className="fas fa-headset text-teal text-xs"></i>
+                          </div>
+                          <h4 className="text-sm font-medium text-navy">Customer Success Manager</h4>
+                        </div>
+                        <p className="text-xs text-gray-600">With construction industry background to support customer onboarding and growth</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-light-grey rounded-lg p-4">
+                    <h3 className="text-lg font-medium text-navy mb-3">Founder Experience</h3>
+                    
+                    <div className="space-y-3">
+                      <div className="flex items-start">
+                        <i className="fas fa-check-circle text-teal mt-1 mr-2 flex-shrink-0"></i>
+                        <div>
+                          <p className="text-sm font-medium text-navy">Operations Excellence</p>
+                          <p className="text-xs text-gray-600">18+ years optimizing complex operational workflows</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start">
+                        <i className="fas fa-check-circle text-teal mt-1 mr-2 flex-shrink-0"></i>
+                        <div>
+                          <p className="text-sm font-medium text-navy">Financial Management</p>
+                          <p className="text-xs text-gray-600">Deep experience with cash flow optimization in asset-heavy businesses</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start">
+                        <i className="fas fa-check-circle text-teal mt-1 mr-2 flex-shrink-0"></i>
+                        <div>
+                          <p className="text-sm font-medium text-navy">Blue-Collar Industry</p>
+                          <p className="text-xs text-gray-600">First-hand understanding of the unique challenges facing these businesses</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-4 bg-white p-3 rounded-lg">
+                      <p className="text-xs text-navy italic">
+                        "I've experienced the cash flow challenges facing blue-collar businesses firsthand. Flowly is built to solve a problem I know intimately."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideContainer>
+        );

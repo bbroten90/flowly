@@ -529,69 +529,126 @@
         <div class="text-center mb-16">
             <span class="inline-block bg-teal bg-opacity-10 text-teal px-4 py-1 rounded-full text-sm font-medium mb-4">Investor Tool</span>
             <h2 class="text-3xl font-extrabold navy sm:text-4xl">
-                Financial Projection Calculator
+                Tiered Financial Projection Calculator
             </h2>
             <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-                Explore how different variables impact Flowly's key financial metrics
+                Explore how our tiered pricing model impacts Flowly's key financial metrics
             </p>
         </div>
 
-        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden card-hover transition-all duration-300">
+        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden card-hover transition-all duration-300">
             <div class="p-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <h3 class="text-xl font-bold navy mb-6">Input Parameters</h3>
                         <div class="space-y-6">
+                            <!-- Total Customers -->
                             <div class="flex flex-col">
-                                <label class="text-sm font-medium navy mb-2">Number of SaaS Customers</label>
+                                <label class="text-sm font-medium navy mb-2">Total Businesses</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <i class="fas fa-users text-gray-400"></i>
                                     </div>
-                                    <input type="number" id="saasCustomers" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="800">
+                                    <input type="number" id="totalCustomers" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="800">
                                 </div>
                             </div>
-
-                            <div class="flex flex-col">
-                                <label class="text-sm font-medium navy mb-2">SaaS Monthly Price ($)</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i class="fas fa-tag text-gray-400"></i>
+                            
+                            <!-- Tier Distribution -->
+                            <div>
+                                <label class="text-sm font-medium navy mb-2">Tier Distribution (%)</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Basic</div>
+                                        <input type="number" id="basicPercentage" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="70">
                                     </div>
-                                    <input type="number" id="saasPrice" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="99">
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col">
-                                <label class="text-sm font-medium navy mb-2">Active Factoring Users per Month</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i class="fas fa-user-check text-gray-400"></i>
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Pro</div>
+                                        <input type="number" id="proPercentage" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="20">
                                     </div>
-                                    <input type="number" id="factoringUsers" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="320">
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col">
-                                <label class="text-sm font-medium navy mb-2">Average Transaction Amount ($)</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i class="fas fa-file-invoice-dollar text-gray-400"></i>
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Enterprise</div>
+                                        <input type="number" id="enterprisePercentage" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="10" readonly>
                                     </div>
-                                    <input type="number" id="transactionAmount" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="7500">
                                 </div>
                             </div>
-
+                            
+                            <!-- Pricing Tiers -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">Monthly Subscription Price ($)</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Basic</div>
+                                        <input type="number" id="basicPrice" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="99">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Pro</div>
+                                        <input type="number" id="proPrice" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="199">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Enterprise</div>
+                                        <input type="number" id="enterprisePrice" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="299">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Average Invoice Sizes -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">Average Invoice Size ($)</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Basic</div>
+                                        <input type="number" id="basicInvoiceSize" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="7500">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Pro</div>
+                                        <input type="number" id="proInvoiceSize" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="15000">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Enterprise</div>
+                                        <input type="number" id="enterpriseInvoiceSize" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="30000">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Invoices Per Month -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">Invoices Per Month</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Basic</div>
+                                        <input type="number" id="basicInvoicesPerMonth" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="1">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Pro</div>
+                                        <input type="number" id="proInvoicesPerMonth" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="2">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Enterprise</div>
+                                        <input type="number" id="enterpriseInvoicesPerMonth" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="3">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Transaction Fee Percentages -->
                             <div class="flex flex-col">
                                 <label class="text-sm font-medium navy mb-2">Transaction Fee Percentage (%)</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i class="fas fa-percentage text-gray-400"></i>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Basic</div>
+                                        <input type="number" id="basicFeePercentage" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="4" step="0.1">
                                     </div>
-                                    <input type="number" id="transactionFee" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="4">
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Pro</div>
+                                        <input type="number" id="proFeePercentage" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="3.5" step="0.1">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500 mb-1">Enterprise</div>
+                                        <input type="number" id="enterpriseFeePercentage" class="py-2 px-3 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="3" step="0.1">
+                                    </div>
                                 </div>
                             </div>
 
+                            <!-- Customer Acquisition Cost -->
                             <div class="flex flex-col">
                                 <label class="text-sm font-medium navy mb-2">Customer Acquisition Cost ($)</label>
                                 <div class="relative">
@@ -601,17 +658,24 @@
                                     <input type="number" id="cac" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="225">
                                 </div>
                             </div>
-
-                            <button onclick="calculateFinancials()" class="w-full btn-gradient hover:shadow-lg text-white px-6 py-3 rounded-md text-base font-medium transition duration-300 ease-in-out transform hover:-translate-y-1">
-                                <i class="fas fa-calculator mr-2"></i>Calculate Financials
-                            </button>
+                            
+                            <!-- Customer Lifetime -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-medium navy mb-2">Average Customer Lifetime (months)</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-clock text-gray-400"></i>
+                                    </div>
+                                    <input type="number" id="avgCustomerLifetime" class="py-3 pl-10 pr-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal focus:border-teal" value="30">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div>
                         <h3 class="text-xl font-bold navy mb-6">Projected Results</h3>
-                        <div id="results" class="bg-light-grey rounded-xl p-6 space-y-4">
-                            <p class="text-gray-500 text-center">Enter your parameters and click calculate to see projections</p>
+                        <div id="results" class="bg-light-grey rounded-xl p-6 space-y-6">
+                            <p class="text-gray-500 text-center">Adjust parameters to see projections</p>
                         </div>
 
                         <div class="mt-6">
@@ -637,105 +701,70 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Tier Comparison Table -->
+                <div class="mt-10">
+                    <h3 class="text-xl font-bold navy mb-6">Tiered Subscription Model</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Feature</th>
+                                    <th id="basicHeader" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Basic ($99/mo)</th>
+                                    <th id="proHeader" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Pro ($199/mo)</th>
+                                    <th id="enterpriseHeader" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Enterprise ($299/mo)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Factoring Fee</td>
+                                    <td id="basicFeeCell" class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">4%</td>
+                                    <td id="proFeeCell" class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">3.5%</td>
+                                    <td id="enterpriseFeeCell" class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">3%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Lead Generation</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                        <i class="fas fa-times-circle text-red-500 text-lg"></i>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">10 leads/month</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">25+ leads/month</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Cash Flow Forecasting</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">Basic</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">Advanced</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">Premium + Scenarios</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Lean Management</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                        <i class="fas fa-times-circle text-red-500 text-lg"></i>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                        <i class="fas fa-times-circle text-red-500 text-lg"></i>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                        <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Support Level</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">Standard</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">Extended Hours</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">24/7 Dedicated</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<script>
-function calculateFinancials() {
-    const saasCustomers = Number(document.getElementById('saasCustomers').value);
-    const saasPrice = Number(document.getElementById('saasPrice').value);
-    const factoringUsers = Number(document.getElementById('factoringUsers').value);
-    const transactionAmount = Number(document.getElementById('transactionAmount').value);
-    const transactionFee = Number(document.getElementById('transactionFee').value);
-    const cac = Number(document.getElementById('cac').value);
-
-    // Calculate basic metrics
-    const saasMRR = saasCustomers * saasPrice;
-    const totalTransactionVolume = factoringUsers * transactionAmount;
-    const transactionMRR = totalTransactionVolume * (transactionFee / 100);
-    const totalMRR = saasMRR + transactionMRR;
-    
-    // Calculate additional investor metrics
-    const annualRevenue = totalMRR * 12;
-    const grossMargin = 78; // Using the target from the page
-    const grossProfit = annualRevenue * (grossMargin / 100);
-    
-    // Calculate LTV (simplified calculation)
-    const avgMonthlyRevenue = totalMRR / (saasCustomers + factoringUsers);
-    const avgCustomerLifetime = 36; // Assuming 3 years average customer lifetime
-    const ltv = avgMonthlyRevenue * avgCustomerLifetime;
-    const ltvCacRatio = (ltv / cac).toFixed(1);
-    
-    // Calculate MRR progress toward target
-    const mrrTarget = 450000;
-    const mrrProgress = (totalMRR / mrrTarget) * 100;
-    
-    // Calculate transaction volume progress toward target
-    const volumeTarget = 1800000;
-    const volumeProgress = (totalTransactionVolume / volumeTarget) * 100;
-
-    document.getElementById('results').innerHTML = `
-        <div class="space-y-6">
-            <div>
-                <div class="flex items-center justify-between mb-2">
-                    <div class="text-sm font-medium navy">Monthly Recurring Revenue</div>
-                    <div class="text-sm font-bold text-teal">$${totalMRR.toLocaleString()}</div>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-bar-fill" style="width: ${Math.min(mrrProgress, 100)}%"></div>
-                </div>
-                <p class="text-xs text-gray-500 mt-2">${mrrProgress.toFixed(1)}% of $450,000 target</p>
-            </div>
-            
-            <div>
-                <div class="flex items-center justify-between mb-2">
-                    <div class="text-sm font-medium navy">Transaction Volume</div>
-                    <div class="text-sm font-bold text-teal">$${totalTransactionVolume.toLocaleString()}</div>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-bar-fill" style="width: ${Math.min(volumeProgress, 100)}%"></div>
-                </div>
-                <p class="text-xs text-gray-500 mt-2">${volumeProgress.toFixed(1)}% of $1.8M target</p>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <div class="text-sm font-medium navy mb-1">SaaS MRR</div>
-                    <div class="text-lg font-bold text-teal">$${saasMRR.toLocaleString()}</div>
-                </div>
-                <div>
-                    <div class="text-sm font-medium navy mb-1">Transaction MRR</div>
-                    <div class="text-lg font-bold text-teal">$${transactionMRR.toLocaleString()}</div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <div class="text-sm font-medium navy mb-1">LTV:CAC Ratio</div>
-                    <div class="text-lg font-bold ${ltvCacRatio >= 15 ? 'text-green-500' : 'text-orange-500'}">${ltvCacRatio}:1</div>
-                </div>
-                <div>
-                    <div class="text-sm font-medium navy mb-1">Annual Revenue</div>
-                    <div class="text-lg font-bold text-teal">$${annualRevenue.toLocaleString()}</div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <div class="text-sm font-medium navy mb-1">Gross Margin</div>
-                    <div class="text-lg font-bold text-green-500">${grossMargin}%</div>
-                </div>
-                <div>
-                    <div class="text-sm font-medium navy mb-1">Gross Profit (Annual)</div>
-                    <div class="text-lg font-bold text-teal">$${grossProfit.toLocaleString()}</div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-</script>
+<!-- Load the tiered calculator JavaScript -->
+<script src="tiered-calculator.js"></script>
 
     <!-- Growth Strategy & Roadmap Section -->
     <div class="py-20 bg-light-grey">
